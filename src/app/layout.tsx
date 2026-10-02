@@ -31,7 +31,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   const jsonLd = organizationJsonLd();
   return (
     <html lang="fr-MA" className={`${anton.variable} ${dmSans.variable}`}>
-      <body>
+      {/* Browser extensions (e.g. ColorZilla) add attributes to <body> before hydration. This exempts
+          only the <body> tag itself; the elements inside it are still hydration-checked. */}
+      <body suppressHydrationWarning>
         <a className="skip-link" href="#contenu">
           Aller au contenu
         </a>

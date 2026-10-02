@@ -19,6 +19,12 @@ npm run build         # production build (also copies assets)
 npm run start         # serve the build
 ```
 
+`dev` and `build` use webpack (`--webpack`) instead of the Next.js 16 default, Turbopack. Windows Smart App Control
+blocks the unsigned native SWC binary (`@next/swc-win32-x64-msvc`: "An Application Control policy has blocked this
+file"). Next.js then falls back to WebAssembly SWC, which compiles and minifies but cannot run Turbopack. Using the
+same bundler for both keeps local builds identical to deployed ones. Remove the flag from both scripts together only
+if every machine that builds the site can load the native binding.
+
 Quality checks:
 
 ```bash

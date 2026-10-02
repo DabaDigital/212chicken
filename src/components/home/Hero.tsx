@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, Expand, MapPin, Pause, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
@@ -9,18 +9,12 @@ import { site } from "@/lib/site";
 
 import styles from "./Hero.module.css";
 
-/**
- * Server-rendered exploded artwork: one intact image for first paint, phones, reduced motion and no-JS.
- *
- * Desktop motion (PageMotion) swaps in three layers split from that same image along its own
- * transparent gaps — bottom bun, upper stack (top bun → chicken, inseparable in the supplied art) and
- * garnish (sauce drop + crumbs). They recompose the image pixel for pixel (verified at build time in
- * scripts/derive-assets.mjs) and stay unloaded (display: none + lazy) until enhancement starts.
- */
+/** The intact photo remains the first-paint, reduced-motion and failed-enhancement fallback. */
 export function Hero() {
   const [firstLine, secondLine] = site.copy.hero_lines;
   // Phones: the canvas bleeds past the gutters (its edges are transparent); 90vw keeps ≥ 1.7x density.
   const artSizes = "(min-width: 1536px) 820px, (min-width: 768px) 56vw, 90vw";
+  const garnish = heroLayers.find((layer) => layer.id === "garnish")!;
   const boundsStyle = {
     "--art-x0": heroBounds.x0,
     "--art-x1": heroBounds.x1,
@@ -55,6 +49,17 @@ export function Hero() {
               <ArrowRight className={styles.secondaryArrow} size={18} strokeWidth={2.25} aria-hidden="true" />
             </Link>
           </div>
+          <div className={styles.motionControls} data-burger-controls>
+            <button type="button" className={styles.crunchButton} data-burger-toggle aria-controls="burger-scene" aria-pressed="true">
+              <span className={styles.crunchIcon}><Expand size={18} aria-hidden="true" /></span>
+              <span data-burger-label>Assembler le burger</span>
+            </button>
+            <span className={styles.controlDivider} aria-hidden="true" />
+            <button type="button" className={styles.pauseButton} data-burger-pause aria-label="Mettre l’animation en pause" aria-pressed="false">
+              <Pause size={15} data-pause-icon aria-hidden="true" />
+              <Play size={15} data-play-icon aria-hidden="true" />
+            </button>
+          </div>
         </div>
 
         <div className={styles.art} style={boundsStyle} data-hero-art>
@@ -67,12 +72,14 @@ export function Hero() {
             </span>
           </span>
 
-          <div className={styles.burger} data-hero-burger>
+          <span className={styles.crunchWord} data-crunch-word aria-hidden="true">CRUNCH!</span>
+
+          <div id="burger-scene" className={styles.burger} data-hero-burger>
             <div className={styles.burgerIntro} data-hero-intro>
               <div className={styles.shadowWrap} aria-hidden="true">
                 <div className={styles.shadow} data-hero-shadow />
               </div>
-              <div className={styles.frame}>
+              <div className={styles.frame} data-burger-camera>
                 <Image
                   src={brandImages.burgerExploded.src}
                   width={brandImages.burgerExploded.width}
@@ -86,24 +93,52 @@ export function Hero() {
                   data-hero-photo
                 />
                 <div className={styles.layers} aria-hidden="true" data-hero-layers>
-                  {heroLayers.map((layer) => (
-                    <Image
-                      key={layer.id}
-                      src={layer.src}
-                      width={layer.width}
-                      height={layer.height}
-                      alt=""
-                      sizes={artSizes}
-                      quality={65}
-                      loading="lazy"
-                      className={styles.layer}
-                      data-hero-layer={layer.id}
-                    />
-                  ))}
+                  <div className={styles.float} data-burger-float>
+                    <div className={styles.assembled} data-burger-assembled>
+                      <Image
+                        {...brandImages.burgerAssembled}
+                        alt=""
+                        sizes={artSizes}
+                        quality={65}
+                        loading="lazy"
+                        className={styles.assembledPhoto}
+                        data-burger-image
+                      />
+                    </div>
+                    <div className={styles.exploded} data-burger-exploded>
+                      {heroLayers.filter((layer) => layer.id !== "garnish").map((layer) => (
+                        <div key={layer.id} className={styles.ingredient} data-hero-layer={layer.id}>
+                          <Image
+                            src={layer.src}
+                            width={layer.width}
+                            height={layer.height}
+                            alt=""
+                            sizes={artSizes}
+                            quality={65}
+                            loading="lazy"
+                            className={styles.layer}
+                            data-burger-image
+                          />
+                        </div>
+                      ))}
+                      <div className={styles.garnish} data-hero-layer="garnish">
+                        {Array.from({ length: 4 }, (_, index) => (
+                          <div key={index} className={`${styles.crumbGroup} ${styles[`crumbGroup${index}`]}`} data-burger-crumbs>
+                            <Image
+                              src={garnish.src} width={garnish.width} height={garnish.height}
+                              alt="" sizes={artSizes} quality={65} loading="lazy"
+                              className={styles.layer} data-burger-image
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <button type="button" className={styles.burgerHit} data-burger-hit aria-label="Animer le burger" aria-controls="burger-scene" title="Cliquez pour faire claquer le burger" />
         </div>
       </div>
     </section>

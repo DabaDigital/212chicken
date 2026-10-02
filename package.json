@@ -9,9 +9,9 @@
   "scripts": {
     "assets": "node scripts/sync-assets.mjs",
     "predev": "npm run assets",
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "prebuild": "npm run assets",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",

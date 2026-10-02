@@ -4,13 +4,12 @@ import dynamic from "next/dynamic";
 import { useSyncExternalStore, type ReactNode } from "react";
 
 /*
- * Progressive enhancement gate. Only desktops (≥ 1024px) without a reduced-motion preference download
- * GSAP; phones and tablets get the short CSS entrance in Hero.module.css. The page is complete without
- * either. PageMotion scopes every selector to this wrapper (its own parent element).
+ * Reduced motion and no-JS keep the intact server-rendered image. The optional controller loads
+ * secondary artwork only when the burger enters the viewport; touch gets the same tap controls.
  */
 const PageMotion = dynamic(() => import("./PageMotion"), { ssr: false });
 
-export const MOTION_QUERY = "(min-width: 64rem) and (prefers-reduced-motion: no-preference)";
+export const MOTION_QUERY = "(prefers-reduced-motion: no-preference)";
 
 function subscribe(onChange: () => void) {
   const query = window.matchMedia(MOTION_QUERY);
