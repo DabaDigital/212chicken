@@ -1,0 +1,300 @@
+/*
+ * Hero. The section creates no stacking context on purpose, so the decorative "212" (z 0) sits behind
+ * the orange ribbon (z 2) while the burger (z 3) and the copy (z 4) sit in front.
+ *
+ * Anton metrics (anton-400.ttf): caps 0.867em, "Ç" cedilla 0.308em below the baseline, text box
+ * 1.505em, widest line "ÇA CROQUE." 4.238em.
+ *  - Title size = available width ÷ 4.3 (never stretched).
+ *  - line-height 1.22 ≥ 0.867 + 0.308 + gap: the line-1 cedilla never touches the line-2 capitals.
+ *  - The cedilla of line 2 hangs 0.12em below the title box: the subtitle margin accounts for it.
+ */
+.hero {
+  --content-w: min(100vw - 2 * var(--gutter), 1440px);
+  --title-size: min(calc(var(--content-w) / 4.3), 7.5rem, 24svh);
+
+  position: relative;
+  padding-bottom: clamp(2.5rem, 8vw, 3.5rem);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1.75rem, 6vw, 2.75rem);
+}
+
+.copy {
+  position: relative;
+  z-index: 4;
+  padding-top: clamp(0.75rem, 3vw, 1.5rem);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--title-size);
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+/* Each line masks its own entrance; the padding keeps the cedilla inside the mask. */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  white-space: nowrap;
+}
+
+.lineInner {
+  display: block;
+}
+
+.lineAccent {
+  color: var(--orange);
+}
+
+.lead {
+  max-width: 34ch;
+  margin-top: calc(var(--title-size) * 0.14 + clamp(0.75rem, 1.8vw, 1.25rem));
+  font-size: clamp(1.0625rem, 0.92rem + 0.7vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.25rem;
+  margin-top: clamp(1.5rem, 4.5vw, 2.25rem);
+}
+
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: 0.5rem;
+  min-height: var(--target);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.secondaryLabel {
+  padding-bottom: 2px;
+  border-bottom: 2px solid currentColor;
+}
+
+.secondary:hover .secondaryLabel {
+  border-bottom-color: var(--orange);
+}
+
+.pin {
+  color: var(--orange);
+}
+
+.secondaryArrow {
+  display: none;
+  color: var(--orange);
+}
+
+/*
+ * Art. --canvas is the square burger canvas; its visible content spans the measured alpha bounds
+ * (--art-x0…--art-y1, from scripts/derive-assets.mjs). On phones the canvas is sized so the food,
+ * not the transparent margin, fills the column; crumbs at the bounds stay inside the viewport.
+ */
+.art {
+  --canvas: calc(var(--content-w) / 0.79);
+
+  position: relative;
+  padding-top: calc(var(--canvas) * 0.13);
+}
+
+.number {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 0;
+  translate: -50% 0;
+  color: var(--orange-212);
+  font-family: var(--font-display);
+  font-size: calc(var(--content-w) * 0.74);
+  line-height: 0.93;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.numberDrift,
+.numberText {
+  display: block;
+}
+
+/*
+ * The digits (cap 0.86em) fit a 0.93em box. Clipping there changes nothing visually, but Chrome sizes
+ * LCP text through ancestor clips only: the clip on the text's parent keeps this decorative layer from
+ * out-sizing the burger as the Largest Contentful Paint element.
+ */
+.numberClip {
+  display: block;
+  height: 0.93em;
+  overflow: hidden;
+}
+
+.burger {
+  position: relative;
+  z-index: 3;
+  width: var(--canvas);
+  margin-left: calc((100% - var(--canvas)) / 2 - ((var(--art-x0) + var(--art-x1)) / 2 - 0.5) * var(--canvas));
+  margin-top: calc(var(--art-y0) * var(--canvas) * -1);
+  margin-bottom: calc((1 - var(--art-y1)) * var(--canvas) * -1);
+}
+
+.burgerIntro {
+  position: relative;
+}
+
+.shadowWrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Soft contact shadow under the bottom bun (the artwork itself has no baked shadow). */
+.shadow {
+  position: absolute;
+  left: 24%;
+  width: 52%;
+  top: 92.5%;
+  height: 8%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(32 18 7 / 0.2), rgb(32 18 7 / 0.07) 55%, rgb(32 18 7 / 0));
+  filter: blur(4px);
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+/*
+ * Layer swap (desktop motion only). display: none keeps the lazy layer images unrequested until
+ * PageMotion sets data-layers="loading"; once all three are decoded ("ready") they replace the intact
+ * photo, which they reproduce exactly, so the swap itself is invisible.
+ */
+.layers {
+  display: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.art[data-layers] .layers {
+  display: block;
+}
+
+.art[data-layers="ready"] .layers {
+  opacity: 1;
+}
+
+.art[data-layers="ready"] .photo {
+  visibility: hidden;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform-origin: 50% 52%;
+}
+
+/* ≥ 768px: side-by-side composition (copy 47% / art 53%). */
+@media (min-width: 48rem) {
+  /* --burger-size lives on .hero so both the copy and the art can read it. */
+  .hero {
+    --header-h: 104px;
+    --copy-w: calc(var(--content-w) * 0.47);
+    --title-size: min(calc(var(--copy-w) / 4.3), 9.75rem, max(19svh, 5.25rem));
+    --hero-pad-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    --burger-size: min(calc(var(--content-w) * 0.53 * 1.3), max(calc((100svh - var(--header-h)) * 1.02), 26rem));
+
+    display: flex;
+    align-items: center;
+    padding-block: 0 var(--hero-pad-bottom);
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 47fr) minmax(0, 53fr);
+    align-items: start;
+    gap: 0;
+    width: 100%;
+  }
+
+  /*
+   * Headline starts level with the top bun (as in the mockups); bottom clearance = how far the slanted
+   * ribbon reaches back into the hero on the left, so the CTAs never meet it.
+   */
+  .copy {
+    padding-top: calc(var(--burger-size) * 0.09);
+    padding-bottom: calc(var(--ribbon-overlap) + var(--ribbon-rise) - var(--hero-pad-bottom) + 1rem);
+  }
+
+  .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+  }
+
+  .secondary {
+    align-self: auto;
+  }
+
+  .pin {
+    display: none;
+  }
+
+  .secondaryArrow {
+    display: block;
+  }
+
+  .art {
+    --canvas: var(--burger-size);
+
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .burger {
+    width: var(--burger-size);
+    margin: 0 0 0 calc((100% - var(--burger-size)) / 2);
+  }
+
+  /* Centred on the burger; the top of the "1" shows above the bun and both "2" show at the sides. */
+  .number {
+    top: calc(5% - 0.065em);
+    font-size: calc(var(--burger-size) * 0.62);
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    --header-h: 128px;
+    --burger-size: min(calc(var(--content-w) * 0.53 * 1.06), max(calc((100svh - var(--header-h)) * 1.02), 32rem));
+  }
+
+  .number {
+    font-size: calc(var(--burger-size) * 0.68);
+  }
+}
+
+/* Mobile: brief transform-only entrance; the complete image is always visible. */
+@media (max-width: 63.99rem) and (prefers-reduced-motion: no-preference) {
+  .lineInner { animation: hero-settle 550ms var(--ease-out) backwards; }
+  .lineAccent .lineInner { animation-delay: 60ms; }
+  .burgerIntro { animation: hero-settle 700ms var(--ease-out) backwards; }
+}
+@keyframes hero-settle {
+  from { transform: translateY(10px); }
+}

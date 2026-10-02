@@ -1,0 +1,44 @@
+.selection {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(5rem, 4rem + 6vw, 9rem) var(--section-space);
+}
+
+.head {
+  display: grid;
+  gap: 1rem 3rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* On phones the heading is sized to hold on one line, as in the approved mobile mockup (~8.9em wide). */
+.title {
+  font-family: var(--font-display);
+  font-size: min(var(--display-l), calc((100vw - 2 * var(--gutter)) / 8.9));
+  font-weight: 400;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+@media (min-width: 48rem) {
+  .title {
+    font-size: var(--display-l);
+  }
+}
+
+.intro {
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: var(--text-lg);
+}
+
+@media (min-width: 64rem) {
+  .head {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    align-items: end;
+  }
+
+  /* Keeps the heading on one line next to the intro column. */
+  .title {
+    font-size: min(var(--display-l), calc((min(100vw - 2 * var(--gutter), 1440px) - 25rem) / 8.9));
+  }
+}

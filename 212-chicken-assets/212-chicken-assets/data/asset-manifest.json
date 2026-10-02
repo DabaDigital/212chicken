@@ -1,0 +1,746 @@
+[
+  {
+    "path": "images/backgrounds/original-pattern.webp",
+    "bytes": 190908,
+    "sha256": "843a9ab90df47c9bea426fac0f2286b0121f5f8acf46477431c257d8d078c5fb",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 1920,
+    "height": 1080,
+    "alpha": false
+  },
+  {
+    "path": "images/banners/banner-1.webp",
+    "bytes": 112788,
+    "sha256": "affdba556ac71bc558cc892a7350a1b12a7877616c3e946bf52e7e7c152a8e42",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 798,
+    "height": 340,
+    "alpha": false
+  },
+  {
+    "path": "images/banners/banner-2.webp",
+    "bytes": 78008,
+    "sha256": "12341fec28064c2f5384d8075fdbf370876536cfb7865645f8eb831edf65f521",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 798,
+    "height": 340,
+    "alpha": false
+  },
+  {
+    "path": "images/banners/banner-3.webp",
+    "bytes": 90638,
+    "sha256": "704aa637f1327a064bb8553076801b021c7e5e850021e01e1e956352eebb4de0",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 798,
+    "height": 342,
+    "alpha": false
+  },
+  {
+    "path": "images/banners/banner2-1.webp",
+    "bytes": 205366,
+    "sha256": "559b52e952ba4d30411c1bc1ca433dae68d48438e9f61b40af7cc74bf7a84540",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 1282,
+    "height": 419,
+    "alpha": false
+  },
+  {
+    "path": "images/banners/banner2-2.webp",
+    "bytes": 51664,
+    "sha256": "c36db7e79146b5989b59f6714d365b8801ed6a4a1261d223647d55b21e390815",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 1278,
+    "height": 423,
+    "alpha": false
+  },
+  {
+    "path": "images/banners/sliders-1.webp",
+    "bytes": 631304,
+    "sha256": "0b58781d4f817d7d75d21380d988116ee12d405a5d9297438860d6381bd403a6",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 2559,
+    "height": 799,
+    "alpha": false
+  },
+  {
+    "path": "images/banners/sliders-2.webp",
+    "bytes": 1035402,
+    "sha256": "954f354809cee9cc52573cca42d443300362cc4381db711cea9a2b4b84fd28f4",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 2559,
+    "height": 799,
+    "alpha": false
+  },
+  {
+    "path": "images/brand/logo-original.webp",
+    "bytes": 12002,
+    "sha256": "a48efd39f211017f1db2f1c74b2139741f3ba75c5c012368d278bb43d5610872",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 137,
+    "height": 265,
+    "alpha": true
+  },
+  {
+    "path": "images/brand/logo.png",
+    "bytes": 28981,
+    "sha256": "a4e22e7c62c8ab3be236753d8f558d4bda5552c8f19860a490960f795ec18c30",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 137,
+    "height": 265,
+    "alpha": true
+  },
+  {
+    "path": "images/decor/floating-fries.png",
+    "bytes": 1123041,
+    "sha256": "eb08c14f736d09efe05e0ff69c071b8faa84ebe7912977783bbd2bc7af20f96b",
+    "origin": "generated_campaign_artwork",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true
+  },
+  {
+    "path": "images/decor/floating-fries.webp",
+    "bytes": 287468,
+    "sha256": "c91dac286c8f45434c38a5310c4f08338287b391c97ec6e46ffc9a49fb6154ac",
+    "origin": "generated_campaign_artwork",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true
+  },
+  {
+    "path": "images/hero/burger-assembled.png",
+    "bytes": 1340328,
+    "sha256": "0df7dfc7798429b7451d38e71c645314e90ecf036244f6ebf058aafc36a58e34",
+    "origin": "generated_campaign_artwork",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true
+  },
+  {
+    "path": "images/hero/burger-assembled.webp",
+    "bytes": 256762,
+    "sha256": "15c0dd08729ae11851ef50e862c8f5f374a3e23c993898fad3eeede7e5fa1d4f",
+    "origin": "generated_campaign_artwork",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true
+  },
+  {
+    "path": "images/hero/burger-exploded.png",
+    "bytes": 1932795,
+    "sha256": "dab313620893bba1413bb52ac958c92959adb92a68a6773d3d2f999370d1c763",
+    "origin": "generated_campaign_artwork",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true
+  },
+  {
+    "path": "images/hero/burger-exploded.webp",
+    "bytes": 491404,
+    "sha256": "119bea32c2d5c9e7219f3d38796863aad4ae6ec4d2368e5877742bc1fb713c5d",
+    "origin": "generated_campaign_artwork",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/original/212-chicken-pop-corn.svg",
+    "bytes": 1657100,
+    "sha256": "2a6133d04e7d8c276d8eb30713ed74c8f7987e63d3f735d3198c2eecd41f5ba1",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/212-skin-tenders.svg",
+    "bytes": 1477395,
+    "sha256": "64fedf1db6d383ca54472b020a21bf00bddeafe10e899add9f6c8c4e6fb9c49f",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/box-n1.svg",
+    "bytes": 2909929,
+    "sha256": "0cfaa64085f223b4ecb994c1f04d34f18ed16b4ee1bc0e55c627a34ffc60857d",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/box-n2.svg",
+    "bytes": 2887937,
+    "sha256": "e53219922f72e2aa6e837e1b7b72a27bd2f550688eec96e8811036eae6a165e5",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/box-n3.svg",
+    "bytes": 2851497,
+    "sha256": "8d26f91846e37fc868742342f47017d863788e74816e9d35ae25c922465c1b07",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/caramel-speculoos.svg",
+    "bytes": 272225,
+    "sha256": "47c4f9a72f31f5e2a4507cdb7a39a07f98578d6f3b6911b6caa0615a387d3732",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/coco-mangue.svg",
+    "bytes": 235797,
+    "sha256": "36b0b4f306270494c05f9da602ed59794c4ab79733d0b6da25978de8cbddc720",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/fraise.svg",
+    "bytes": 312549,
+    "sha256": "89d874deba15a1334d6aef1522c43eb45bdc722aecf41d3a1b4e53d3ebc7600e",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/frite-zigzag.svg",
+    "bytes": 437733,
+    "sha256": "05b3053a7943e543981d296428822c4da3bc23fbfc3d98139d3a9dc27750e549",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/long-212-pepper.svg",
+    "bytes": 1952665,
+    "sha256": "8e074a44c0b29534809c2fc1541cc9bf20c3f1c42171fa850a01845b5b0673df",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/mac-and-cheese.svg",
+    "bytes": 535876,
+    "sha256": "847f867359b14e4c5dbdc44c9545ebfdbdea44d53dad85f7365c7341ec567fa6",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/menu-box-2-mac.svg",
+    "bytes": 2429740,
+    "sha256": "df7aa694b3f32d0bd06bca00b5d4021918a703434a2e9fb421f27b244a186f80",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/menu-box-b-mac.svg",
+    "bytes": 1609067,
+    "sha256": "2368def9f49e9b98f3302f88d48a6a47a6cebaea8c5d13465cb7ddb6261ead00",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/menu-box-t-mac.svg",
+    "bytes": 1406819,
+    "sha256": "3c4d7a71b75627152c4131faf330c27e69f9ab1bd992ad5e59f02b436b86a9c6",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/royal-212-wistor.svg",
+    "bytes": 1521929,
+    "sha256": "f1d98ddbc99248704fc31420fec7aff2f63a3d50041bb8cca9c6655de70f146c",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/royal-crispy-bacon.svg",
+    "bytes": 3470947,
+    "sha256": "5083edc4a5fc2a2eaf5025d08487f7a0eaf8c13911557ae2123fed14b0667228",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/royal-crunch-double.svg",
+    "bytes": 3946861,
+    "sha256": "e34de4439dd8d9fde829b9b4f414b78b9ea385e47f7646198b07885ba672d7dc",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/salade-cesar.svg",
+    "bytes": 1344051,
+    "sha256": "18e899811eafed6f1b7256060c5d1ac40383a6dee406ca4b6734fd73143be30d",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/supreme-anana-s.svg",
+    "bytes": 3521512,
+    "sha256": "d13584fcdf4d47be1527ab119d9e5f6538b2d5d23f988f868844b10c2c6cf4be",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/tiramisu-fraise.svg",
+    "bytes": 765265,
+    "sha256": "7d591451678979e6dda3db79221c6e760a270380b1e7e1eae263021464f7b85d",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/tiramisu-milka.svg",
+    "bytes": 1253137,
+    "sha256": "69d6c258cf73f04c099bda1127fa7b27ce1143040d57455e488ac54b8b1a5c0f",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/tiramisu-nutella.svg",
+    "bytes": 1448521,
+    "sha256": "a18f3b608e330ea0d6b4e26f45569a675a41a1481e89058a3086e8847cb9f479",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/tiramisu-oreo.svg",
+    "bytes": 1228689,
+    "sha256": "def9723f2e69461d99a6865b0213705fa878b6b0036f10e2700b525c800a98e8",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/wings-bbq-miel.svg",
+    "bytes": 1500484,
+    "sha256": "d045a3e48ac0ff2253a607a7a61640efbc0de304032035119cf5c36f3f2982d2",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/original/wings-nature.svg",
+    "bytes": 1242838,
+    "sha256": "40d0e6e638e3553bd72420089576b6528e89fce6542d3bf1da01972bec7f967c",
+    "origin": "original_212_chicken_site_asset_or_export"
+  },
+  {
+    "path": "images/menu/png/212-chicken-pop-corn.png",
+    "bytes": 945269,
+    "sha256": "ab382dba625704459730739f670a251bd368d01c318767dc5786b845fb31364f",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/212-skin-tenders.png",
+    "bytes": 983742,
+    "sha256": "6d58a78768958071f5a3311a00547fac1413251b521c22ee001f4abd46ad1144",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/box-n1.png",
+    "bytes": 960875,
+    "sha256": "398b5748fc95eba84f40346d99385c81993a8305b23c64b93ed1af81ec8a9be6",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/box-n2.png",
+    "bytes": 971839,
+    "sha256": "3fdc22a3acad3ab9d15a0f269dd37633630074420916d2e5b0f1be65992bece5",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/box-n3.png",
+    "bytes": 942824,
+    "sha256": "1aa27e5d0edb3c4cc294d4c07e3e45940d8e383a65cbe342cece277846beab40",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/caramel-speculoos.png",
+    "bytes": 655984,
+    "sha256": "de004c2a0063c853ac173e1a3fb4d5e706f966c2acfa99c9a50f6f94e3c2c19e",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/coco-mangue.png",
+    "bytes": 560535,
+    "sha256": "27c7cc3ece2a1752ee392d9ecf1cbcd0cf6334039c5770772fb12acf504273ab",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/fraise.png",
+    "bytes": 627005,
+    "sha256": "8871438bf71d20f8b0a2292f100c698dc80597ba74c6bb6649df090719a68d55",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/frite-zigzag.png",
+    "bytes": 585199,
+    "sha256": "102bac9d058f587f0f5b476d125945629208c7367656b52ca73aa0ceebfa684d",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/long-212-pepper.png",
+    "bytes": 630092,
+    "sha256": "240b8138900184ee868e658c35798da94cf2a55ef67e8e4d59f604cba4c1f28d",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/mac-and-cheese.png",
+    "bytes": 1160431,
+    "sha256": "1eee3c5d1f2c35dc75ca5e1e75746627a536031c65b783f0f0875a4e2f142d6b",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/menu-box-2-mac.png",
+    "bytes": 1097686,
+    "sha256": "f518836549cd6ae1e837283f317e201ebedfdf46045cf8baf071579229888d7c",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/menu-box-b-mac.png",
+    "bytes": 1086702,
+    "sha256": "abd317662a36edd0074b28b4a688866a060c000ec236822a1c8be93bb7bf6b85",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/menu-box-t-mac.png",
+    "bytes": 957769,
+    "sha256": "eda084336c25a93bbd3247105e1243660e553cd5e11799a8dfd7ef99222df91d",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/royal-212-wistor.png",
+    "bytes": 618615,
+    "sha256": "da6727c8012f15f711943ebe940aed5ed9873b7b99546f237bd3e2e95644b817",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/royal-crispy-bacon.png",
+    "bytes": 948551,
+    "sha256": "34ab80df002cb3536fb55e77ab5741283b0543a6d61237854cc168a0c7fa1e88",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/royal-crunch-double.png",
+    "bytes": 1279954,
+    "sha256": "a42b5d233e27713e7da4d4c7c1173c2b926167ca8270ab3373721f026a54ca19",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/salade-cesar.png",
+    "bytes": 847857,
+    "sha256": "c029ca981cd272ccb02a1fc2ed97f1c6c47506268896a06a743b94bcb777dfb2",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/supreme-anana-s.png",
+    "bytes": 1051536,
+    "sha256": "b8de4feecc93700dd94b635117ade2f9239c4ad93a4b055302665076dbfa7830",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/tiramisu-fraise.png",
+    "bytes": 281322,
+    "sha256": "6d13a65d467f3bd14418a23a75978ca705c5bcf8b9eccd802d3350015744ae18",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/tiramisu-milka.png",
+    "bytes": 533844,
+    "sha256": "0d5e4acc2a27f12ff0983847bb5f5974de03664523ea5b744b5ce6ab68b24fb9",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/tiramisu-nutella.png",
+    "bytes": 522987,
+    "sha256": "06076a7aa809f6e9a9b639837188814e044cca346828fe15c08e00fe29ea18b8",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/tiramisu-oreo.png",
+    "bytes": 468860,
+    "sha256": "ed99b28c52f174f5063386e9cb1d60f4f322d1404efe88e085dad485481b92f6",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/wings-bbq-miel.png",
+    "bytes": 972161,
+    "sha256": "886d2c23224f50b23cacf577eca141c693ff80ff152c31be2502d19855aa5680",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/png/wings-nature.png",
+    "bytes": 930910,
+    "sha256": "4c10d61f492f0eecbf28c4ba4340599c275c5058b642225b3897fc0872a8301e",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/212-chicken-pop-corn.webp",
+    "bytes": 110290,
+    "sha256": "fed0f2c6a2e220f9e72af625aa5b70092b6044b1abd5f051cb7ded87315f4b1e",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/212-skin-tenders.webp",
+    "bytes": 112910,
+    "sha256": "141a242622f37032f31784a998d47f2347120811a9cac9f136f6930f57a34beb",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/box-n1.webp",
+    "bytes": 109502,
+    "sha256": "646154cf6bb527850a1c48f4fa3d3758ef55733eb6b2994db7f764d7bb94cd20",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/box-n2.webp",
+    "bytes": 124310,
+    "sha256": "d1ed92d5d68efe54bdb7d5aa331c4828ec452af59f499ff6720bdbc488d4d11e",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/box-n3.webp",
+    "bytes": 107794,
+    "sha256": "27f26a6e4fc29ab7c06a3a049bf2a05eed64417e3a2a0b0ef68b2ab2f807c6da",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/caramel-speculoos.webp",
+    "bytes": 59160,
+    "sha256": "8476c05418b0e35c685f87856deaf00d83450f558a73ba8e73963693c56dcce5",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/coco-mangue.webp",
+    "bytes": 50164,
+    "sha256": "4b39035db7fb40edef8c28c45d67c61b3c1458a1381cad83572c5ee2af207343",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/fraise.webp",
+    "bytes": 55474,
+    "sha256": "e61aac306a8a4894ef61fe6b3a08613e16285a102a48d9a0f1ecf4be9849afdd",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/frite-zigzag.webp",
+    "bytes": 57666,
+    "sha256": "f7cbedf6d982ea751e82817994721cbbf5185d6cafcfcab01d55c87adefd1966",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/long-212-pepper.webp",
+    "bytes": 96116,
+    "sha256": "29fe4cefa83c80d426adc5cf8eac2930e396a1d22819e7226ee6f313e1b7633f",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/mac-and-cheese.webp",
+    "bytes": 127302,
+    "sha256": "56c4f1e58613ad84e39d4d820f9594b72cfe269f1d45ecf1bd6f125f2ab58d15",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/menu-box-2-mac.webp",
+    "bytes": 131416,
+    "sha256": "c39a97f1ffe4832d631ceffa5f37c86a69c3a1d86b8b23cda32cee7a60f94c38",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/menu-box-b-mac.webp",
+    "bytes": 112850,
+    "sha256": "7c7c3266b94dd8c12d8626995355610cacf89721396ba2e0da4f3547621683bd",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/menu-box-t-mac.webp",
+    "bytes": 96914,
+    "sha256": "cabe059b4f7cc79178a14212c8d8498cc26ce061b7d57b127de825b3a34a57be",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/royal-212-wistor.webp",
+    "bytes": 67908,
+    "sha256": "bb68f5e2eb43289330a673e85149c6310a1f150a8cd0b872addba287cb00a822",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/royal-crispy-bacon.webp",
+    "bytes": 110980,
+    "sha256": "0e4e206ce656c20862e1e64d174edd8faa027ee7167620561f933c757defa173",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/royal-crunch-double.webp",
+    "bytes": 129266,
+    "sha256": "55be2026189ce409b8b3da856122665b28d20a755455c0ef89dc2c9a128bd493",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/salade-cesar.webp",
+    "bytes": 91854,
+    "sha256": "0d8aff3a27bbd38945c93bd6bb970b8df7f090c459424b4f1a7c4409566bf7f7",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/supreme-anana-s.webp",
+    "bytes": 118598,
+    "sha256": "6fb08c47cba76927d93be7b9dfe269fa82f2c081975e44ff9e9ed08af5ad9c5f",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/tiramisu-fraise.webp",
+    "bytes": 38574,
+    "sha256": "72afe19fbbd68dbbec365d1052ffd4963977a5ccb9d976598e636ff930392380",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/tiramisu-milka.webp",
+    "bytes": 49472,
+    "sha256": "569efe50ba947ac4545bb2dea6b659a6ec50e111a9799f4786d6ede9f74b19f3",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/tiramisu-nutella.webp",
+    "bytes": 62614,
+    "sha256": "38be00bc548f226ab9543f4c586eea0f26aa7133b31513516739f268c5cc0e06",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/tiramisu-oreo.webp",
+    "bytes": 53436,
+    "sha256": "53eec9aba92f27810c5a739b31d45ca32680eb663a229fc2cd13480e0cfe15df",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/wings-bbq-miel.webp",
+    "bytes": 101468,
+    "sha256": "d086e120817854767a9963ddf2ce0b288ad13eb2c34b7fb0265f75ad154dbf10",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  },
+  {
+    "path": "images/menu/webp/wings-nature.webp",
+    "bytes": 92720,
+    "sha256": "0dbde59062bc973799b44c4d5199a9acfb2e98fd733ef08f9ad4ed8df755b752",
+    "origin": "original_212_chicken_site_asset_or_export",
+    "width": 800,
+    "height": 800,
+    "alpha": true
+  }
+]

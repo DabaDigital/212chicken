@@ -1,0 +1,91 @@
+/* Solid brand-orange surface with ink text (5.5:1). Focus rings switch to ink here. */
+.band {
+  --focus-color: var(--ink);
+
+  position: relative;
+  overflow: hidden;
+  background: var(--orange);
+  color: var(--ink);
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  align-items: center;
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  gap: 1.5rem;
+  max-width: 40rem;
+}
+
+.eyebrow {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3.75rem, 2rem + 7vw, 8.5rem);
+  font-weight: 400;
+  line-height: 1.06;
+}
+
+.lead {
+  max-width: 34rem;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.75rem;
+  margin-top: 0.5rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--target);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link span {
+  padding-bottom: 2px;
+  border-bottom: 2px solid currentColor;
+}
+
+.decor {
+  display: none;
+}
+
+.fries {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 48rem) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.55fr);
+    gap: 2rem;
+  }
+
+  .decor {
+    display: block;
+    width: min(100%, 24rem);
+    margin: -3rem -1rem -3rem auto;
+    rotate: -8deg;
+  }
+}

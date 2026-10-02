@@ -1,0 +1,52 @@
+{
+  "heroBounds": {
+    "x0": 0.141,
+    "y0": 0.043,
+    "x1": 0.894,
+    "y1": 0.96
+  },
+  "heroLayers": {
+    "source": "images/hero/burger-exploded.png",
+    "width": 1254,
+    "height": 1254,
+    "layers": [
+      {
+        "id": "bun",
+        "path": "images/hero/layers/bun.webp",
+        "bounds": {
+          "x0": 0.216,
+          "y0": 0.714,
+          "x1": 0.774,
+          "y1": 0.963
+        }
+      },
+      {
+        "id": "stack",
+        "path": "images/hero/layers/stack.webp",
+        "bounds": {
+          "x0": 0.203,
+          "y0": 0.037,
+          "x1": 0.864,
+          "y1": 0.825
+        }
+      },
+      {
+        "id": "garnish",
+        "path": "images/hero/layers/garnish.webp",
+        "bounds": {
+          "x0": 0,
+          "y0": 0.017,
+          "x1": 0.925,
+          "y1": 0.963
+        }
+      }
+    ],
+    "components": 28
+  },
+  "productImageScale": {
+    "tiramisu-fraise": 1.33,
+    "tiramisu-nutella": 1.27,
+    "tiramisu-oreo": 1.19,
+    "tiramisu-milka": 1.21
+  }
+}

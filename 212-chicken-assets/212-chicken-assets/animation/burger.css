@@ -1,0 +1,8 @@
+.burger-stage { --progress: 1; position: relative; width: 100%; aspect-ratio: 1; isolation: isolate; }
+.burger-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.burger-stage .assembled { opacity: calc(1 - var(--progress)); }
+.burger-stage .exploded { opacity: var(--progress); }
+@media (prefers-reduced-motion: reduce) {
+  .burger-stage .assembled { opacity: 0 !important; }
+  .burger-stage .exploded { opacity: 1 !important; }
+}

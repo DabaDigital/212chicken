@@ -1,0 +1,112 @@
+.pill {
+  --pill-bg: var(--ink);
+  --pill-fg: var(--cream);
+  --pill-icon-bg: var(--orange);
+  --pill-icon-fg: var(--cream);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.875rem;
+  min-height: 48px;
+  padding: 0.3125rem 0.3125rem 0.3125rem 1.375rem;
+  border-radius: var(--radius-pill);
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition:
+    background-color var(--dur-hover) ease,
+    color var(--dur-hover) ease;
+}
+
+.cream {
+  --pill-bg: var(--cream);
+  --pill-fg: var(--ink);
+  --pill-icon-bg: var(--ink);
+  --pill-icon-fg: var(--cream);
+}
+
+.lg {
+  min-height: 58px;
+  padding-left: 1.75rem;
+  font-size: var(--text-lg);
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.short {
+  display: none;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--pill-icon-bg);
+  color: var(--pill-icon-fg);
+}
+
+.lg .icon {
+  width: 48px;
+  height: 48px;
+}
+
+.icon svg {
+  transition: transform var(--dur-hover) var(--ease-out);
+}
+
+.pill:hover {
+  --pill-bg: var(--ink-hover);
+}
+
+.cream:hover {
+  --pill-bg: #fff;
+}
+
+.pill:active {
+  transform: translateY(1px);
+}
+
+.blockAlways {
+  display: flex;
+  width: 100%;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pill:hover .icon svg {
+    transform: translateX(3px);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .blockMobile {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    padding-inline: 4rem;
+  }
+
+  .blockMobile .icon {
+    position: absolute;
+    right: 0.3125rem;
+  }
+}
+
+@media (max-width: 29.99rem) {
+  .full:has(+ .short) {
+    display: none;
+  }
+
+  .short {
+    display: inline;
+  }
+}

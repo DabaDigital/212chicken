@@ -1,0 +1,17 @@
+@import url('../fonts/fonts.css');
+:root {
+  --cream: #fff8e8; --orange: #ff4d00; --ink: #201207;
+  --muted: #66584b; --line: #e9d9c2;
+  --font-display: 'Anton', Impact, sans-serif;
+  --font-body: 'DM Sans', Arial, sans-serif;
+  --page-gutter: clamp(20px, 3vw, 48px);
+  --container-width: 1440px;
+}
+/* Keep decorative backgrounds in CSS; no large background raster required. */
+.cream-surface { background: var(--cream); color: var(--ink); }
+.hero-surface { background: radial-gradient(ellipse at 75% 50%, #ffe4b733, transparent 65%), var(--cream); }
+.display { font-family: var(--font-display); font-weight: 400; line-height: 1.05; }
+.action { min-height: 48px; padding: 12px 22px; border-radius: 999px; background: var(--ink); color: var(--cream); }
+.action:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+/* White text on bright orange is not used for small labels. Use dark ink. */
+.accent-action { background: var(--orange); color: var(--ink); }

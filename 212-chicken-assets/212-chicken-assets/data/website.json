@@ -1,0 +1,48 @@
+{
+  "brand": {
+    "name": "212 Chicken",
+    "website": "https://212chicken.ma/",
+    "logo": "images/brand/logo.png",
+    "instagram": "https://www.instagram.com/212_chicken_maroc/",
+    "locale": "fr-MA",
+    "currency": "MAD"
+  },
+  "proposed_copy": {
+    "hero_lines": [
+      "ÇA CROQUE.",
+      "ÇA CLAQUE."
+    ],
+    "hero_description": "Du poulet croustillant. Du goût. Du vrai.",
+    "primary_cta": "Explorer la carte",
+    "secondary_cta": "Trouver un restaurant",
+    "order_cta": "Commander",
+    "menu_heading": "À chacun son crunch."
+  },
+  "links": {
+    "menu": "#carte",
+    "restaurant_search": "https://www.google.com/maps/search/212+chicken/@35.7397927,-5.8773413,14z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D",
+    "ordering": null,
+    "phone": null,
+    "email": null
+  },
+  "restaurants": [],
+  "reviews": [],
+  "reels": [],
+  "opening_hours": null,
+  "source_observations": {
+    "contact_url": "https://212chicken.ma/contact",
+    "displayed_phone": "+212 6 00 00 00 00",
+    "telephone_link": "+33983489459",
+    "displayed_hours": "Du Lundi au Dimanche de 11h à 14h et de 18h30 à 22h30",
+    "status": "unverified_conflicting_contact_details_do_not_publish"
+  },
+  "missing_before_launch": [
+    "Adresses, coordonnées et horaires de chaque restaurant",
+    "Numéro officiel: le texte et le lien du site source ne correspondent pas",
+    "URL ou service réel de commande",
+    "Contenu du supplément menu",
+    "Allergènes et disponibilités",
+    "Photos et détails des nouveaux produits absents du catalogue source",
+    "Liens réels des reels et avis autorisés"
+  ]
+}

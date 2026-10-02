@@ -1,0 +1,26 @@
+﻿id,name,category_id,display_category_id,description_fr,price,currency,menu_upgrade_price,image,image_png,source_url
+box-n1,Box N°1,box-family,box-family,"8 pièces de poulet mixte, 2 frites zig-zag, mac & cheese, boisson 1L, 2 buns.",149,MAD,,images/menu/webp/box-n1.webp,images/menu/png/box-n1.png,https://212chicken.ma/box-family
+box-n2,Box N°2,box-family,box-family,"12 pièces de poulet mixte, 3 frites zig-zag, mac & cheese, boisson 1L, 3 buns.",210,MAD,,images/menu/webp/box-n2.webp,images/menu/png/box-n2.png,https://212chicken.ma/box-family
+box-n3,Box N°3,box-family,box-family,"16 pièces de poulet mixte, 4 frites zig-zag, mac & cheese, boisson 1L, 4 buns.",259,MAD,,images/menu/webp/box-n3.webp,images/menu/png/box-n3.png,https://212chicken.ma/box-family
+212-chicken-pop-corn,212 Chicken Pop Corn,star-box,star-box,250g de poulet popcorn croustillant.,45,MAD,,images/menu/webp/212-chicken-pop-corn.webp,images/menu/png/212-chicken-pop-corn.png,https://212chicken.ma/star-box
+212-skin-tenders,212 Skin Tenders,star-box,star-box,8 pièces de tenders de poulet croustillants.,79,MAD,,images/menu/webp/212-skin-tenders.webp,images/menu/png/212-skin-tenders.png,https://212chicken.ma/star-box
+wings-nature,Wings Nature,star-box,star-box,8 wings nature grillées.,45,MAD,,images/menu/webp/wings-nature.webp,images/menu/png/wings-nature.png,https://212chicken.ma/star-box
+wings-bbq-miel,Wings BBQ & Miel,star-box,star-box,8 wings enrobées de sauce BBQ et miel.,55,MAD,,images/menu/webp/wings-bbq-miel.webp,images/menu/png/wings-bbq-miel.png,https://212chicken.ma/star-box
+menu-box-b-mac,Menu Box B-MAC,star-box-combo,star-box-combo,"1 Burger, frite zig-zag, mac & cheese, boisson.",49,MAD,,images/menu/webp/menu-box-b-mac.webp,images/menu/png/menu-box-b-mac.png,https://212chicken.ma/star-box-combo
+menu-box-t-mac,Menu Box T-MAC,star-box-combo,star-box-combo,"4 tenders, frite zig-zag, mac & cheese, boisson.",49,MAD,,images/menu/webp/menu-box-t-mac.webp,images/menu/png/menu-box-t-mac.png,https://212chicken.ma/star-box-combo
+menu-box-2-mac,Menu Box 2-MAC,star-box-combo,star-box-combo,"1 Burger, 2 tenders, frite zig-zag, mac & cheese, boisson.",65,MAD,,images/menu/webp/menu-box-2-mac.webp,images/menu/png/menu-box-2-mac.png,https://212chicken.ma/star-box-combo
+supreme-anana-s,Supreme Anana's,burger,burger,"Poulet pané, cheddar, tranche d’ananas, sauce 212 au choix.",49,MAD,16,images/menu/webp/supreme-anana-s.webp,images/menu/png/supreme-anana-s.png,https://212chicken.ma/burger
+long-212-pepper,Long 212 Pepper,burger,burger,"Poulet pané, cheddar, salade, tomate, sauce 212 au choix.",55,MAD,16,images/menu/webp/long-212-pepper.webp,images/menu/png/long-212-pepper.png,https://212chicken.ma/burger
+royal-crispy-bacon,Royal Crispy Bacon,burger,burger,"Poulet pané, cheddar, salade, tomate, sauce 212 au choix.",39,MAD,16,images/menu/webp/royal-crispy-bacon.webp,images/menu/png/royal-crispy-bacon.png,https://212chicken.ma/burger
+royal-crunch-double,Royal Crunch Double,burger,burger,"Poulet pané double, cheddar, sauce 212 au choix.",39,MAD,16,images/menu/webp/royal-crunch-double.webp,images/menu/png/royal-crunch-double.png,https://212chicken.ma/burger
+royal-212-wistor,Royal 212 Wistor,burger,wraps,"Filet de poulet, cheddar, salade, tomate, sauce 212 au choix.",35,MAD,16,images/menu/webp/royal-212-wistor.webp,images/menu/png/royal-212-wistor.png,https://212chicken.ma/burger
+salade-cesar,Salade César,salade,salade,"Tenders, salade, tomates cerise, oignons frits, parmesan, sauce 212 au choix.",35,MAD,,images/menu/webp/salade-cesar.webp,images/menu/png/salade-cesar.png,https://212chicken.ma/salade
+mac-and-cheese,Mac and Cheese,texmex,texmex,,25,MAD,,images/menu/webp/mac-and-cheese.webp,images/menu/png/mac-and-cheese.png,https://212chicken.ma/texmex
+frite-zigzag,Frite Zigzag,texmex,texmex,,12,MAD,,images/menu/webp/frite-zigzag.webp,images/menu/png/frite-zigzag.png,https://212chicken.ma/texmex
+caramel-speculoos,Caramel Spéculoos,milk-shake,milk-shake,,29,MAD,,images/menu/webp/caramel-speculoos.webp,images/menu/png/caramel-speculoos.png,https://212chicken.ma/milk-shake
+fraise,Fraise,milk-shake,milk-shake,,29,MAD,,images/menu/webp/fraise.webp,images/menu/png/fraise.png,https://212chicken.ma/milk-shake
+coco-mangue,Coco Mangue,milk-shake,milk-shake,,29,MAD,,images/menu/webp/coco-mangue.webp,images/menu/png/coco-mangue.png,https://212chicken.ma/milk-shake
+tiramisu-fraise,Tiramisu Fraise,dessert,dessert,,29,MAD,,images/menu/webp/tiramisu-fraise.webp,images/menu/png/tiramisu-fraise.png,https://212chicken.ma/dessert
+tiramisu-nutella,Tiramisu Nutella,dessert,dessert,,29,MAD,,images/menu/webp/tiramisu-nutella.webp,images/menu/png/tiramisu-nutella.png,https://212chicken.ma/dessert
+tiramisu-oreo,Tiramisu Oreo,dessert,dessert,,29,MAD,,images/menu/webp/tiramisu-oreo.webp,images/menu/png/tiramisu-oreo.png,https://212chicken.ma/dessert
+tiramisu-milka,Tiramisu Milka,dessert,dessert,,29,MAD,,images/menu/webp/tiramisu-milka.webp,images/menu/png/tiramisu-milka.png,https://212chicken.ma/dessert

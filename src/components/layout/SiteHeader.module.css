@@ -1,0 +1,122 @@
+.header {
+  position: relative;
+  z-index: 20;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 88px;
+  padding-block: 0.75rem;
+}
+
+/* The vertical logo is narrow; the link keeps a ≥ 44px wide hit area around it. */
+.logoLink {
+  display: grid;
+  place-items: center;
+  flex: none;
+  min-width: var(--target);
+  margin-left: -0.375rem;
+  border-radius: 10px;
+}
+
+.logo {
+  width: auto;
+  height: 64px;
+}
+
+.nav {
+  display: none;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target);
+  padding-block: 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.35rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-hover) var(--ease-out);
+}
+
+.navLink:hover::after,
+.navLink[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.cta {
+  font-size: 0.9375rem;
+}
+
+@media (min-width: 48rem) {
+  .inner {
+    gap: clamp(2rem, 6vw, 6.5rem);
+    min-height: 104px;
+  }
+
+  .logo {
+    height: 80px;
+  }
+
+  .nav {
+    display: block;
+  }
+
+  .cta {
+    font-size: 1.0625rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .inner {
+    min-height: 128px;
+    padding-block: 1rem;
+  }
+
+  .logo {
+    height: 100px;
+  }
+
+  .navLink {
+    font-size: 1.125rem;
+  }
+
+  .cta {
+    min-height: 54px;
+    padding-left: 1.5rem;
+    font-size: 1.125rem;
+  }
+}

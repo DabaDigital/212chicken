@@ -1,0 +1,41 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# testing / QA artefacts (npm run test:e2e, scripts/screenshots.mjs, Lighthouse)
+/coverage
+/test-results/
+/playwright-report/
+/blob-report/
+/screenshots/
+/lighthouse/
+/qa/
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# Runtime copies generated from the asset pack by `npm run assets`
+/public/212/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+
+# env files (see .env.example)
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

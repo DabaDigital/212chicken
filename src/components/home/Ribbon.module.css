@@ -1,0 +1,41 @@
+/* Wider than the viewport and rotated; .page-frame clips the horizontal overflow (overflow-x: clip). */
+.ribbon {
+  position: relative;
+  z-index: 2;
+  width: 150vw;
+  margin-left: -25vw;
+  margin-top: calc(-1 * var(--ribbon-overlap));
+  background: var(--orange);
+  color: var(--cream);
+  transform: rotate(4deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  padding-block: clamp(0.5rem, 0.7vw, 0.625rem);
+  font-family: var(--font-display);
+  /* ≥ 24px keeps the cream-on-orange text in the WCAG "large text" range (3.1:1). */
+  font-size: clamp(1.5rem, 1.05rem + 1vw, 1.875rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.item::after {
+  content: "";
+  display: inline-block;
+  width: 0.24em;
+  height: 0.24em;
+  margin-inline: 0.85em;
+  border-radius: 50%;
+  background: currentColor;
+}

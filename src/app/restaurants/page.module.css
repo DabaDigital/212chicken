@@ -1,0 +1,102 @@
+.intro {
+  padding-block: clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem);
+}
+
+.introInner {
+  display: grid;
+  align-items: center;
+  gap: 1.5rem 3rem;
+}
+
+.introText {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 1.8rem + 7.4vw, 8.5rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.lead {
+  max-width: 34rem;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.actions {
+  margin-top: 0.5rem;
+}
+
+.art {
+  width: min(100%, 26rem);
+  margin-inline: auto;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+/* The assembled frame sits in the lower 60% of its square canvas; frame that part only. */
+.burger {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 97%;
+}
+
+.next {
+  padding-block: clamp(2.5rem, 5vw, 4rem) var(--section-space);
+  border-top: 1px solid var(--line);
+}
+
+.columns {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.column {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.875rem;
+}
+
+.column p {
+  max-width: 30rem;
+  color: var(--muted);
+}
+
+.columnTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--target);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-underline-offset: 0.3em;
+}
+
+@media (min-width: 48rem) {
+  .introInner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .art {
+    width: 100%;
+  }
+
+  .columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,219 @@
+/*
+ * 212 Chicken design tokens. Source: 212-chicken-assets/.../design/tokens.json + tokens.css.
+ * Fonts are provided by next/font (see src/app/fonts.ts); tokens.css' @import of fonts.css is
+ * intentionally not used so the WOFF2 files are loaded exactly once.
+ */
+:root {
+  /* Brand */
+  --cream: #fff8e8;
+  --orange: #ff4d00;
+  --ink: #201207;
+  --muted: #66584b;
+  --line: #e9d9c2;
+
+  /* Supporting colors derived from the approved references. */
+  --orange-212: #ff7f24; /* decorative "212" layer, sampled from the approved mockups */
+  --cream-deep: #fbefd8; /* quiet secondary surface */
+  --peach: #f6c8ae; /* hairline around the card arrow, decorative only */
+  --ink-hover: #3a2415;
+  --scrim: rgb(32 18 7 / 0.55);
+
+  /* Type */
+  --font-display: var(--font-anton), Impact, "Arial Narrow", sans-serif;
+  --font-body: var(--font-dm-sans), Arial, Helvetica, sans-serif;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.0625rem, 0.98rem + 0.35vw, 1.25rem);
+  --text-xl: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+  --display-l: clamp(2.625rem, 1.4rem + 5.6vw, 6.25rem);
+  --display-m: clamp(2.125rem, 1.35rem + 3.4vw, 4.25rem);
+
+  /* Layout */
+  --container: 1440px;
+  --gutter: clamp(1.25rem, 4.2vw, 3rem);
+  /* Slanted ribbon geometry (150vw wide, 4deg): overlap into the hero + rise at the left edge. */
+  --ribbon-overlap: clamp(2.5rem, 7vw, 7rem);
+  --ribbon-rise: 3.5vw;
+  --section-space: clamp(3.5rem, 2rem + 6vw, 7.5rem);
+  --radius-pill: 999px;
+  --radius-l: 28px;
+  --target: 44px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-hover: 180ms;
+
+  /* Focus */
+  --focus-color: var(--orange);
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 1.5rem;
+}
+
+/* Page scroll is locked while a modal dialog (mobile menu, product details) is open. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+/* Horizontal clipping for decorative overflow (rotated ribbon, oversized "212"). */
+.page-frame {
+  overflow-x: clip;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-frame > main {
+  flex: 1 0 auto;
+}
+
+main:focus {
+  outline: none;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.accent {
+  color: var(--orange);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--cream);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  [data-reveal],
+  [data-reveal-item] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
