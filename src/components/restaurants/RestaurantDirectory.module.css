@@ -1,0 +1,10 @@
+.directory {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.count,
+.hint {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}

@@ -4,9 +4,9 @@ Responsive restaurant website for 212 Chicken, built from the approved Option 1 
 (`212-chicken-assets/212-chicken-assets/references/`) with Next.js 16 (App Router) and TypeScript.
 
 - `/`: hero « ÇA CROQUE. ÇA CLAQUE. » with the floating burger and the "212" layer, orange ribbon, filterable menu
-  selection, restaurant finder band, Instagram link.
-- `/carte`: all 25 products in a unified grid, 9 display categories, sticky category filters (deep-linkable `?categorie=`), accent-
-  insensitive search, accessible product dialog.
+  selection, restaurant finder band (cards once restaurants are confirmed), "Suivez le crunch." social band.
+- `/carte`: all 25 products in a unified grid, 9 display categories as wrapping filters (no sideways scrolling; sticky on
+  wide screens; deep-linkable `?categorie=`), accent-insensitive search, accessible product dialog.
 - `/restaurants`: honest restaurant finder (Google Maps search) until verified addresses exist.
 - Branded 404, sitemap, robots, social card, icons, JSON-LD.
 

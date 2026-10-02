@@ -4,6 +4,7 @@
     "website": "https://212chicken.ma/",
     "logo": "images/brand/logo.png",
     "instagram": "https://www.instagram.com/212_chicken_maroc/",
+    "tiktok": "https://www.tiktok.com/@212_chicken_maroc",
     "locale": "fr-MA",
     "currency": "MAD"
   },
@@ -25,7 +26,170 @@
     "phone": null,
     "email": null
   },
-  "restaurants": [],
+  "restaurants": [
+    {
+      "id": "maarif",
+      "name": "Maarif",
+      "city": "Casablanca",
+      "address": "203 Bd Mohammed Zerktouni",
+      "hours": "11:00 – 00:00",
+      "google_place_id": "ChIJc44TUwDTpw0RB8WbXEdH-jE",
+      "services": [
+        "sur_place",
+        "a_emporter",
+        "livraison"
+      ],
+      "featured": true,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20Maarif%20Casablanca&query_place_id=ChIJc44TUwDTpw0RB8WbXEdH-jE",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "aeria-mall",
+      "name": "Aeria Mall",
+      "city": "Casablanca",
+      "address": "37 Bd Moulay Abdellah Cherif, étage 2",
+      "hours": "11:00 – 23:00",
+      "google_place_id": "ChIJ_-QAmFrTpw0RMHK72Osmmec",
+      "services": [
+        "sur_place",
+        "a_emporter",
+        "livraison"
+      ],
+      "featured": true,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20Aeria%20Mall%20Casablanca&query_place_id=ChIJ_-QAmFrTpw0RMHK72Osmmec",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "almohades",
+      "name": "Almohades",
+      "city": "Casablanca",
+      "address": "101 Bd des Almohades",
+      "hours": null,
+      "google_place_id": "ChIJIbiHGQDTpw0ROYDwv4KyPKU",
+      "services": [],
+      "featured": false,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20Almohades%20Casablanca&query_place_id=ChIJIbiHGQDTpw0ROYDwv4KyPKU",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "californie-mall",
+      "name": "Californie Mall",
+      "city": "Casablanca",
+      "address": "Centre commercial Californie Mall, 2ème étage, CT 1029",
+      "hours": null,
+      "google_place_id": "ChIJvYMtRQAtpg0RcbJvESDLWGQ",
+      "services": [],
+      "featured": false,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20Californie%20Mall%20Casablanca&query_place_id=ChIJvYMtRQAtpg0RcbJvESDLWGQ",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "almaz",
+      "name": "Almaz",
+      "city": "Casablanca",
+      "address": "Sela Park, Quartier Almaz, Rocade Sud-Ouest",
+      "hours": "11:00 – 23:00",
+      "google_place_id": "ChIJ7W6Twp8tpg0Ru9nbDgO2MWc",
+      "services": [],
+      "featured": false,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20Almaz%20Casablanca&query_place_id=ChIJ7W6Twp8tpg0Ru9nbDgO2MWc",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "ovillage",
+      "name": "O’Village",
+      "city": "Casablanca",
+      "address": "O’Village, Sidi Maarouf",
+      "hours": "11:00 – 23:00",
+      "google_place_id": "ChIJp3qoPwAtpg0R6siYto0WzZw",
+      "services": [
+        "a_emporter"
+      ],
+      "featured": true,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20O%E2%80%99Village%20Casablanca&query_place_id=ChIJp3qoPwAtpg0R6siYto0WzZw",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "bo-village",
+      "name": "Bo Village",
+      "city": "Bouskoura",
+      "address": "Bo Village",
+      "hours": null,
+      "google_place_id": "ChIJtUM3RAAtpg0RoiL96zQwRNY",
+      "services": [
+        "a_emporter"
+      ],
+      "featured": false,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20Bo%20Village%20Bouskoura&query_place_id=ChIJtUM3RAAtpg0RoiL96zQwRNY",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "tanger",
+      "name": "Tanger",
+      "city": "Tanger",
+      "address": "Socco Alto, Avenue Banafsaj, Route California",
+      "hours": "11:00 – 23:00",
+      "google_place_id": "ChIJA7D-fot5DA0R9KcKwd70mok",
+      "services": [],
+      "featured": true,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20Tanger%20Tanger&query_place_id=ChIJA7D-fot5DA0R9KcKwd70mok",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "marrakech-agdal",
+      "name": "Marrakech Agdal",
+      "city": "Marrakech",
+      "address": "Agdal, Km 8 Route d’Amezmiz",
+      "hours": null,
+      "google_place_id": "ChIJTQXwWQDvrw0RsSNaze16M0g",
+      "services": [],
+      "featured": false,
+      "verified": true,
+      "photo": null,
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=212%20Chicken%20Marrakech%20Agdal%20Marrakech&query_place_id=ChIJTQXwWQDvrw0RsSNaze16M0g",
+      "source": "Owner-supplied listing snapshot, 2026-10-02"
+    },
+    {
+      "id": "ain-diab",
+      "name": "Ain Diab",
+      "city": "Casablanca",
+      "address": "Boulevard de la Corniche",
+      "verified": false,
+      "source": "Owner-supplied design location; needs verification"
+    },
+    {
+      "id": "gauthier",
+      "name": "Gauthier",
+      "city": "Casablanca",
+      "address": "Rue Abderrahmane",
+      "verified": false,
+      "source": "Owner-supplied design location; needs verification"
+    },
+    {
+      "id": "rabat-agdal",
+      "name": "Rabat Agdal",
+      "city": "Rabat",
+      "address": "Avenue Fal Ould Oumeir",
+      "verified": false,
+      "source": "Owner-supplied design location; needs verification"
+    }
+  ],
   "reviews": [],
   "reels": [],
   "opening_hours": null,

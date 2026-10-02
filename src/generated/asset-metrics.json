@@ -48,5 +48,31 @@
     "tiramisu-nutella": 1.27,
     "tiramisu-oreo": 1.19,
     "tiramisu-milka": 1.21
+  },
+  "campaign": {
+    "boxExplosion": {
+      "source": "box-explosion.png",
+      "path": "images/campaign/box-explosion.webp",
+      "width": 1265,
+      "height": 1086
+    },
+    "tendersDip": {
+      "source": "tenders-dip.png",
+      "path": "images/campaign/tenders-dip.webp",
+      "width": 1024,
+      "height": 1273
+    },
+    "cup": {
+      "source": "box-and-cup.png",
+      "path": "images/campaign/cup.webp",
+      "width": 392,
+      "height": 759
+    },
+    "neon": {
+      "source": "neon-good-mood.png",
+      "path": "images/campaign/neon-good-mood.webp",
+      "width": 751,
+      "height": 1304
+    }
   }
 }

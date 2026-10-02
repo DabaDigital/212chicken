@@ -140,7 +140,7 @@ export function MenuExplorer({ groups, totalProducts, orderingUrl }: MenuExplore
       </div>
 
       <div className={styles.categoryBar}>
-        <CategoryFilter label="Catégories" options={options} value={category} onChange={selectCategory} showCounts scrollable />
+        <CategoryFilter label="Catégories" options={options} value={category} onChange={selectCategory} showCounts />
       </div>
 
       <p className={styles.status} role="status">

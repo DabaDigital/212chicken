@@ -8,15 +8,29 @@
   gap: 1.25rem;
 }
 
+/* All categories wrap into view (no sideways scrolling). */
 .categoryBar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   min-width: 0;
   margin-block: -0.75rem;
-  padding-block: 0.5rem 0.25rem;
+  padding-block: 0.5rem 1rem;
   border-bottom: 1px solid var(--line);
   background: var(--cream);
+}
+
+/* On wide screens the cap splits the pills into two balanced rows instead of a full row plus one or two. */
+.categoryBar > * {
+  max-width: 62rem;
+}
+
+/* The bar only follows the grid where it takes two rows of a tall enough window; on phones
+   (five rows) it would hide the products. */
+@media (min-width: 64rem) and (min-height: 40rem) {
+  .categoryBar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding-top: 0.75rem;
+  }
 }
 
 .search {

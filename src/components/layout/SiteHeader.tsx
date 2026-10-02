@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { brandImages } from "@/lib/assets";
-import { site } from "@/lib/site";
+import { site, socialLinks } from "@/lib/site";
 
 import { HeaderNav } from "./HeaderNav";
 import styles from "./SiteHeader.module.css";
@@ -23,7 +23,7 @@ export function SiteHeader() {
             loading="eager"
           />
         </Link>
-        <HeaderNav orderingUrl={site.orderingUrl} instagram={site.instagram} logo={logo} />
+        <HeaderNav orderingUrl={site.orderingUrl} socials={socialLinks} logo={logo} />
       </div>
     </header>
   );

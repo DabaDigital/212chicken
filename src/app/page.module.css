@@ -1,7 +1,7 @@
 .selection {
   position: relative;
   z-index: 1;
-  padding-block: clamp(5rem, 4rem + 6vw, 9rem) var(--section-space);
+  padding-block: clamp(5rem, 4rem + 6vw, 9rem) clamp(3rem, 4vw, 5rem);
 }
 
 .head {

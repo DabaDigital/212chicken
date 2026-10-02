@@ -2,9 +2,9 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { InstagramIcon } from "@/components/ui/InstagramIcon";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 import { brandImages } from "@/lib/assets";
-import { site } from "@/lib/site";
+import { site, socialLinks } from "@/lib/site";
 
 import styles from "./SiteFooter.module.css";
 
@@ -33,16 +33,16 @@ export function SiteFooter() {
                 Nos restaurants
               </Link>
             </li>
-            {site.instagram ? (
-              <li>
-                <a href={site.instagram.url} className={styles.link} target="_blank" rel="noopener noreferrer">
-                  <InstagramIcon size={18} />
-                  Instagram
+            {socialLinks.map((social) => (
+              <li key={social.id}>
+                <a href={social.url} className={styles.link} target="_blank" rel="noopener noreferrer">
+                  <SocialIcon id={social.id} size={18} />
+                  {social.label}
                   <ArrowUpRight size={16} aria-hidden="true" />
                   <span className="sr-only"> (nouvel onglet)</span>
                 </a>
               </li>
-            ) : null}
+            ))}
           </ul>
         </nav>
       </div>

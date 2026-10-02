@@ -9,6 +9,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Small route styles ship with the HTML instead of blocking first paint on another request.
+  // experimental: { inlineCss: true },
   images: {
     // Runtime copies live in /public/212 (see scripts/sync-assets.mjs).
     localPatterns: [{ pathname: "/212/**", search: "" }],

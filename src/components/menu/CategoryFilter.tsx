@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 import styles from "./CategoryFilter.module.css";
 
 interface FilterOption {
@@ -15,25 +13,12 @@ interface CategoryFilterProps {
   value: string;
   onChange: (id: string) => void;
   showCounts?: boolean;
-  scrollable?: boolean;
 }
 
-/** Toggle buttons that wrap at home; the full menu uses a compact, keyboard-scrollable strip. */
-export function CategoryFilter({ label, options, value, onChange, showCounts = false, scrollable = false }: CategoryFilterProps) {
-  const groupRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!scrollable) return;
-    const group = groupRef.current;
-    const active = group?.querySelector<HTMLElement>('[aria-pressed="true"]');
-    if (!group || !active) return;
-    const outer = group.getBoundingClientRect();
-    const inner = active.getBoundingClientRect();
-    if (inner.left < outer.left || inner.right > outer.right) {
-      group.scrollLeft += inner.left - outer.left - (outer.width - inner.width) / 2;
-    }
-  }, [scrollable, value]);
+/** Toggle buttons that wrap onto as many rows as needed: every option stays visible, no sideways scrolling. */
+export function CategoryFilter({ label, options, value, onChange, showCounts = false }: CategoryFilterProps) {
   return (
-    <div ref={groupRef} role="group" aria-label={label} className={`${styles.group} ${scrollable ? styles.scrollable : ""}`}>
+    <div role="group" aria-label={label} className={styles.group}>
       {options.map((option) => {
         const pressed = option.id === value;
         const hasCount = showCounts && typeof option.count === "number";

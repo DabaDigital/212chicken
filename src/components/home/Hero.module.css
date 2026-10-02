@@ -1,6 +1,7 @@
 /*
  * Hero. The section creates no stacking context on purpose, so the decorative "212" (z 0) sits behind
- * the orange ribbon (z 2) while the burger (z 3) and the copy (z 4) sit in front.
+ * the orange ribbon (z 2) while the burger (z 3), the copy and the actions (z 4) sit in front.
+ * Phones stack headline → burger → actions; from 768px the burger moves beside them.
  *
  * Anton metrics (anton-400.ttf): caps 0.867em, "Ç" cedilla 0.308em below the baseline, text box
  * 1.505em, widest line "ÇA CROQUE." 4.238em.
@@ -13,18 +14,34 @@
   --title-size: min(calc(var(--content-w) / 4.3), 7.5rem, 24svh);
 
   position: relative;
-  padding-bottom: clamp(2.5rem, 8vw, 3.5rem);
+  /* Phones end on the actions: keep them clear of the slanted ribbon overlapping the bottom edge. */
+  padding-bottom: calc(var(--ribbon-overlap) + var(--ribbon-rise) + 1.25rem);
 }
 
+/* minmax(0, 1fr): the no-wrap title never widens the column, so the burger keeps its place (no CLS,
+   no page overflow) while the wider fallback font shows before Anton arrives. */
 .grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(1.75rem, 6vw, 2.75rem);
 }
 
-.copy {
+/* The actions also stay above the burger canvas, whose transparent lower margin overlaps them. */
+.copy,
+.cta {
   position: relative;
   z-index: 4;
+}
+
+.copy {
   padding-top: clamp(0.75rem, 3vw, 1.5rem);
+}
+
+/* Phones: the burger controls come first, right under the burger, then the actions. */
+.cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .title {
@@ -66,7 +83,6 @@
   flex-direction: column;
   align-items: stretch;
   gap: 1.25rem;
-  margin-top: clamp(1.5rem, 4.5vw, 2.25rem);
 }
 
 .secondary {
@@ -244,8 +260,8 @@
 .motionControls {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.7rem;
-  margin-top: 1.4rem;
   visibility: hidden;
 }
 
@@ -324,23 +340,9 @@
   .pauseButton:hover { color: var(--orange); }
 }
 
-@media (max-width: 47.99rem) {
-  .hero { padding-bottom: 7.5rem; }
-  .copy { position: static; }
-  .motionControls {
-    position: absolute;
-    z-index: 5;
-    bottom: 4rem;
-    left: 0;
-    width: 100%;
-    justify-content: center;
-    margin-top: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
+/* Static composition: the controls never become available, so they take no space. */
+@media (prefers-reduced-motion: reduce), (scripting: none) {
   .motionControls { display: none; }
-  .hero { padding-bottom: clamp(2.5rem, 8vw, 3.5rem); }
 }
 
 /* ≥ 768px: side-by-side composition (copy 47% / art 53%). */
@@ -358,27 +360,47 @@
     padding-block: 0 var(--hero-pad-bottom);
   }
 
+  /* The burger spans both rows; the flexible second row absorbs its extra height, so the actions
+     stay right under the copy. */
   .grid {
     grid-template-columns: minmax(0, 47fr) minmax(0, 53fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "copy art"
+      "cta  art";
     align-items: start;
     gap: 0;
     width: 100%;
   }
 
-  /*
-   * Headline starts level with the top bun (as in the mockups); bottom clearance = how far the slanted
-   * ribbon reaches back into the hero on the left, so the CTAs never meet it.
-   */
+  /* Headline starts level with the top bun (as in the mockups). */
   .copy {
+    grid-area: copy;
     padding-top: calc(var(--burger-size) * 0.09);
+  }
+
+  /*
+   * The burger controls drop below the actions here; reading-flow keeps keyboard order visual where
+   * supported. Bottom clearance = how far the slanted ribbon reaches back into the hero on the left.
+   */
+  .cta {
+    grid-area: cta;
+    gap: 1.4rem;
+    padding-top: clamp(1.5rem, 4.5vw, 2.25rem);
     padding-bottom: calc(var(--ribbon-overlap) + var(--ribbon-rise) - var(--hero-pad-bottom) + 1rem);
+    reading-flow: flex-visual;
   }
 
   .actions {
+    order: -1;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem 2rem;
+  }
+
+  .motionControls {
+    justify-content: flex-start;
   }
 
   .secondary {
@@ -396,6 +418,7 @@
   .art {
     --canvas: var(--burger-size);
 
+    grid-area: art;
     width: 100%;
     padding-top: 0;
   }

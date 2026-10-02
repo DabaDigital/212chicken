@@ -71,6 +71,21 @@ export const heroLayers: HeroLayer[] = assetMetrics.heroLayers.layers.map((layer
 /** Alpha bounding box of the full exploded frame (fractions of the square canvas). */
 export const heroBounds: Bounds = assetMetrics.heroBounds;
 
+function campaignImage({ path, width, height }: { path: string; width: number; height: number }): StaticImage {
+  return { src: assetUrl(path), width, height };
+}
+
+/**
+ * Owner-supplied campaign art (generated, illustrative; 212-chicken-assets/campaign/README.md), trimmed
+ * and converted by scripts/derive-assets.mjs. Decoration only: never a substitute for product photos.
+ */
+export const campaignImages = {
+  boxExplosion: campaignImage(assetMetrics.campaign.boxExplosion),
+  tendersDip: campaignImage(assetMetrics.campaign.tendersDip),
+  cup: campaignImage(assetMetrics.campaign.cup),
+  neon: campaignImage(assetMetrics.campaign.neon),
+} as const;
+
 const productImageScale: Record<string, number> = assetMetrics.productImageScale;
 
 /** Display scale for product photos with unusually large transparent padding (1 = as supplied). */

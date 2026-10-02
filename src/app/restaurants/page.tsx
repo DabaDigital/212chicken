@@ -1,11 +1,13 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
-import { InstagramIcon } from "@/components/ui/InstagramIcon";
+import { RestaurantDirectory } from "@/components/restaurants/RestaurantDirectory";
 import { PillLink } from "@/components/ui/PillLink";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 import { brandImages } from "@/lib/assets";
 import { pageMetadata } from "@/lib/metadata";
-import { site } from "@/lib/site";
+import { restaurants } from "@/lib/restaurants";
+import { site, socialLinks } from "@/lib/site";
 
 import styles from "./page.module.css";
 
@@ -17,8 +19,7 @@ export const metadata = pageMetadata({
 });
 
 /**
- * No verified restaurant records exist yet (data/website.json → restaurants: []), so this page
- * never lists addresses, hours or "open now" states. It offers the brand's general map search.
+ * Directory from the owner's supplied locations, with city filters and individual Maps destinations.
  */
 export default function RestaurantsPage() {
   const { burgerAssembled } = brandImages;
@@ -31,8 +32,8 @@ export default function RestaurantsPage() {
               Nos <span className="accent">restaurants.</span>
             </h1>
             <p className={styles.lead}>
-              Pour trouver un 212 Chicken, ouvrez la recherche « 212 Chicken » sur Google Maps&nbsp;: vous y verrez les
-              établissements référencés et pourrez préparer votre itinéraire.
+              Retrouvez votre 212 Chicken à Casablanca, Bouskoura, Tanger ou Marrakech.
+              Choisissez votre ville et préparez votre itinéraire.
             </p>
             {site.restaurantSearchUrl ? (
               <div className={styles.actions}>
@@ -58,6 +59,17 @@ export default function RestaurantsPage() {
         </div>
       </section>
 
+      {restaurants.length ? (
+        <section className={styles.addresses} aria-labelledby="addresses-title">
+          <div className="container">
+            <h2 id="addresses-title" className={`${styles.columnTitle} ${styles.addressesTitle}`}>
+              Nos adresses
+            </h2>
+            <RestaurantDirectory restaurants={restaurants} logo={brandImages.logo} />
+          </div>
+        </section>
+      ) : null}
+
       <section className={styles.next} aria-label="Avant de venir">
         <div className={`container ${styles.columns}`}>
           <div className={styles.column} data-reveal>
@@ -74,16 +86,24 @@ export default function RestaurantsPage() {
               Voir la carte
             </PillLink>
           </div>
-          {site.instagram ? (
+          {socialLinks.length ? (
             <div className={styles.column} data-reveal>
-              <h2 className={styles.columnTitle}>Sur Instagram</h2>
-              <p>Suivez l’actualité de la marque sur son compte officiel.</p>
-              <a href={site.instagram.url} className={styles.social} target="_blank" rel="noopener noreferrer">
-                <InstagramIcon size={22} />
-                <span>{site.instagram.handle}</span>
-                <ArrowUpRight size={18} strokeWidth={2.25} aria-hidden="true" />
-                <span className="sr-only"> sur Instagram (nouvel onglet)</span>
-              </a>
+              <h2 className={styles.columnTitle}>Sur les réseaux</h2>
+              <p>
+                Suivez l’actualité de la marque sur {socialLinks.length > 1 ? "ses comptes officiels" : "son compte officiel"}.
+              </p>
+              <ul role="list" className={styles.socials}>
+                {socialLinks.map((social) => (
+                  <li key={social.id}>
+                    <a href={social.url} className={styles.social} target="_blank" rel="noopener noreferrer">
+                      <SocialIcon id={social.id} size={22} />
+                      <span>{social.label}</span>
+                      <ArrowUpRight size={18} strokeWidth={2.25} aria-hidden="true" />
+                      <span className="sr-only"> (nouvel onglet)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           ) : null}
         </div>

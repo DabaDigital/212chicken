@@ -76,6 +76,15 @@
   line-height: 1;
 }
 
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .social {
   display: inline-flex;
   align-items: center;
@@ -99,4 +108,12 @@
   .columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+.addresses {
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.addressesTitle {
+  margin-bottom: 1.5rem;
 }

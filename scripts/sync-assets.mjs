@@ -4,7 +4,8 @@
  * and regenerates the app icons from the brand logo.
  *
  * - The asset pack stays the single source of truth (it is never modified).
- * - Only WebP files referenced by the data (plus brand/hero/decor files) are copied.
+ * - Only WebP files referenced by the data (products, confirmed restaurant photos) plus
+ *   brand/hero/decor files are copied.
  * - Every referenced path is verified; a missing file fails the build.
  * - Files in /public/212 that are no longer referenced are removed.
  *
@@ -23,6 +24,8 @@ import { deriveAssets } from "./derive-assets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ASSET_ROOT = path.join(PROJECT_ROOT, "212-chicken-assets", "212-chicken-assets");
+// Owner-supplied campaign art, kept beside the pack (see its README); converted by derive-assets.mjs.
+const CAMPAIGN_ROOT = path.join(PROJECT_ROOT, "212-chicken-assets", "campaign");
 const PUBLIC_DIR = path.join(PROJECT_ROOT, "public", "212");
 const APP_DIR = path.join(PROJECT_ROOT, "src", "app");
 const GENERATED_METRICS = path.join(PROJECT_ROOT, "src", "generated", "asset-metrics.json");
@@ -68,8 +71,14 @@ async function main() {
   const manifest = JSON.parse(await readFile(path.join(ASSET_ROOT, "data", "asset-manifest.json"), "utf8"));
   const manifestPaths = new Map(manifest.map((entry) => [entry.path, entry]));
 
+  const website = JSON.parse(await readFile(path.join(ASSET_ROOT, "data", "website.json"), "utf8"));
+
   const productImages = menu.products.map((product) => product.image);
-  const runtimeFiles = [...new Set([...STATIC_RUNTIME_FILES, ...productImages])];
+  // Storefront photos of confirmed restaurant entries (see src/lib/restaurants.ts); none in the snapshot.
+  const restaurantPhotos = (website.restaurants ?? [])
+    .filter((entry) => entry?.verified === true && typeof entry.photo === "string")
+    .map((entry) => entry.photo);
+  const runtimeFiles = [...new Set([...STATIC_RUNTIME_FILES, ...productImages, ...restaurantPhotos])];
 
   const problems = [];
   for (const rel of runtimeFiles) {
@@ -98,12 +107,15 @@ async function main() {
 
   const derived = await deriveAssets({
     assetRoot: ASSET_ROOT,
+    campaignRoot: CAMPAIGN_ROOT,
     publicDir: PUBLIC_DIR,
     generatedFile: GENERATED_METRICS,
     products: menu.products,
   });
 
-  const wanted = new Set([...runtimeFiles, ...derived.files].map((rel) => path.join(PUBLIC_DIR, rel)));
+  const wanted = new Set(
+    [...runtimeFiles, ...derived.files, ...derived.campaign.files].map((rel) => path.join(PUBLIC_DIR, rel)),
+  );
   let removed = 0;
   for (const file of await listFiles(PUBLIC_DIR)) {
     if (!wanted.has(file)) {
@@ -138,6 +150,9 @@ async function main() {
   console.log(
     `[assets] hero layers ${derived.files.length} (${derived.written} written, recomposition exact); ` +
       `scaled product photos: ${derived.scaled.join(", ") || "none"}${derived.metricsChanged ? " · metrics updated" : ""}`,
+  );
+  console.log(
+    `[assets] campaign art ${derived.campaign.files.length} (${derived.campaign.written} written) → public/212/images/campaign`,
   );
 }
 

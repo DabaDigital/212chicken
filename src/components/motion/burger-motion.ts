@@ -71,7 +71,13 @@ export function createBurgerMotion(hero: HTMLElement, context: gsap.Context) {
     });
     if (open) pop();
   });
-  const onToggle = () => { toggleInContext(); };
+  let toggleAfterLoad = false;
+  const onToggle = () => {
+    if (!ready) {
+      toggleAfterLoad = !toggleAfterLoad;
+      loadArtwork();
+    } else toggleInContext();
+  };
   const onPause = () => {
     userPaused = !userPaused;
     pause.setAttribute("aria-pressed", String(userPaused));
@@ -139,19 +145,27 @@ export function createBurgerMotion(hero: HTMLElement, context: gsap.Context) {
         .to(transition, { progress: 1, duration: 1.25, ease: "power2.inOut" });
     }
     syncPlayback();
+    if (toggleAfterLoad) toggleInContext();
   });
+  const loadArtwork = () => {
+    if (loading) return;
+    loading = true;
+    art.dataset.layers = "loading";
+    const images = [...hero.querySelectorAll<HTMLImageElement>("[data-burger-image]")];
+    images.forEach((image) => { image.loading = "eager"; });
+    Promise.all(images.map((image) => image.decode())).then(() => enhance()).catch(() => {
+      if (alive) {
+        art.removeAttribute("data-layers");
+        hero.removeAttribute("data-burger-ready");
+      }
+    });
+  };
+  // Touch visitors get a fast, intact photo; their first tap loads and assembles the layers.
+  if (!desktop) hero.dataset.burgerReady = "true";
   const observer = new IntersectionObserver(([entry]) => {
     if (!entry) return;
     visible = entry.isIntersecting;
-    if (visible && !loading) {
-      loading = true;
-      art.dataset.layers = "loading";
-      const images = [...hero.querySelectorAll<HTMLImageElement>("[data-burger-image]")];
-      images.forEach((image) => { image.loading = "eager"; });
-      Promise.all(images.map((image) => image.decode())).then(() => enhance()).catch(() => {
-        if (alive) art.removeAttribute("data-layers");
-      });
-    }
+    if (visible && desktop) loadArtwork();
     syncPlayback();
   }, { threshold: 0.05 });
   observer.observe(art);

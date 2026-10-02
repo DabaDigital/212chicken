@@ -42,6 +42,14 @@ export default function PageMotion() {
           scrollTrigger: { trigger: section, start: "top 92%", once: true },
         });
       }
+      // Decorative collage pieces drift by their data-parallax distance (px) while their section crosses the viewport.
+      for (const piece of select("[data-parallax]") as HTMLElement[]) {
+        const distance = Number(piece.dataset.parallax) || 0;
+        gsap.fromTo(piece, { y: -distance }, {
+          y: distance, ease: "none",
+          scrollTrigger: { trigger: piece.closest("section") ?? piece, start: "top bottom", end: "bottom top", scrub: 0.6 },
+        });
+      }
       document.fonts.ready.then(() => { if (alive) ScrollTrigger.refresh(); });
       return () => { alive = false; };
     });

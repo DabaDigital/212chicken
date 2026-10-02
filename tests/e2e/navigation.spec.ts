@@ -1,6 +1,16 @@
+import { readFileSync } from "node:fs";
+
 import { expect, test } from "@playwright/test";
 
 const MAPS_SEARCH_PREFIX = "https://www.google.com/maps/search/212+chicken/";
+const MAPS_SEARCH = new RegExp(`^${MAPS_SEARCH_PREFIX.replace(/[.+?/]/g, "\\$&")}`);
+
+// Expectations follow the data: restaurant cards and TikTok appear only once the owner supplies them.
+const website = JSON.parse(readFileSync("212-chicken-assets/212-chicken-assets/data/website.json", "utf8")) as {
+  brand: { instagram: string; tiktok?: string | null };
+  restaurants: { verified?: unknown; featured?: boolean; name?: string; maps_url?: string }[];
+};
+const confirmedRestaurants = website.restaurants.filter((entry) => entry.verified === true).length;
 
 test.describe("Navigation and calls to action", () => {
   test("hero CTAs lead to the menu and the restaurant finder", async ({ page }) => {
@@ -40,11 +50,40 @@ test.describe("Navigation and calls to action", () => {
     await page.goto("/restaurants");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Nos restaurants/);
     const maps = page.getByRole("link", { name: /Rechercher sur Google Maps/ });
-    await expect(maps).toHaveAttribute("href", new RegExp(`^${MAPS_SEARCH_PREFIX.replace(/[.+?/]/g, "\\$&")}`));
+    await expect(maps).toHaveAttribute("href", MAPS_SEARCH);
     await expect(maps).toHaveAttribute("target", "_blank");
     await expect(maps).toHaveAttribute("rel", /noopener/);
-    // No unverified business data on the page.
-    await expect(page.getByText(/ouvert maintenant|horaires|\+212|\+33/i)).toHaveCount(0);
+    // Addresses only for confirmed entries; never "open now" states or the conflicting phone numbers.
+    await expect(page.getByRole("article")).toHaveCount(confirmedRestaurants);
+    await expect(page.getByText(/ouvert maintenant|\+212|\+33/i)).toHaveCount(0);
+    if (!confirmedRestaurants) await expect(page.getByText(/horaires/i)).toHaveCount(0);
+  });
+
+  test("home restaurant band leads to the finder and the map search", async ({ page }) => {
+    await page.goto("/");
+    const band = page.getByRole("region", { name: /Envie de croquer/ });
+    await expect(band.getByRole("link", { name: /Trouver un restaurant|Voir nos adresses/ })).toHaveAttribute(
+      "href",
+      "/restaurants",
+    );
+    const maps = band.getByRole("link", { name: /Ouvrir dans Google Maps/ });
+    await expect(maps).toHaveAttribute("href", MAPS_SEARCH);
+    await expect(maps).toHaveAttribute("target", "_blank");
+    const featured = website.restaurants.filter((entry) => entry.verified === true && entry.featured).slice(0, 4);
+    await expect(band.getByRole("article")).toHaveCount(featured.length);
+    for (const restaurant of featured) {
+      await expect(band.getByRole("link", { name: `${restaurant.name} — voir sur Google Maps (nouvel onglet)`, exact: true }))
+        .toHaveAttribute("href", restaurant.maps_url!);
+    }
+  });
+
+  test("social band links only to the brand's configured accounts", async ({ page }) => {
+    await page.goto("/");
+    const social = page.getByRole("region", { name: "Suivez le crunch." });
+    const instagram = social.getByRole("link", { name: /Voir Instagram/ });
+    await expect(instagram).toHaveAttribute("href", website.brand.instagram);
+    await expect(instagram).toHaveAttribute("target", "_blank");
+    await expect(social.getByRole("link", { name: /Voir TikTok/ })).toHaveCount(website.brand.tiktok ? 1 : 0);
   });
 
   test("unknown routes render the branded 404", async ({ page }) => {

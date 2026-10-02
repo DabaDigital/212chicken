@@ -13,18 +13,32 @@ were retained. This work does not deploy the website.
   The assembled and exploded contours differ, so there is no crossfade or claimed ingredient morph.
 - Decorative 212 proportions now fit the desktop art column more closely. The orange ribbon is slimmer,
   and the contact shadow is softer. Anton line spacing preserves both cedillas and subtitle clearance.
-- On phones the copy, primary action and restaurant link come before the alpha-aware food composition.
+- On phones the hero stacks headline → burger → burger controls → "Explorer la carte" and the restaurant
+  link (owner's request, 2026-10-02; the approved mockup put the actions before the burger). The source
+  order matches, so phone focus and reading order follow the screen. From 768px the burger sits beside the
+  copy and the controls drop below the actions (`reading-flow` keeps keyboard order visual where supported).
+  On a 393×852 phone the primary action now starts just below the fold; the header's "La carte" stays visible.
 - The complete menu is one continuous product grid, with category labels, all 25 products, combined
   accent-insensitive search and category filtering, counts, and an accessible result announcement.
-- A compact, sticky category strip remains available while scrolling. It supports native touch/keyboard
-  scrolling, a visible scrollbar, and keeps the active button in view. Changing a category while deep in
-  the results brings the search/results area back into view, rather than the page header.
+- Category buttons wrap onto as many rows as needed; nothing scrolls sideways (2026-10-02, replacing the
+  horizontally scrolling strip). From 1024 × 640 px the bar takes two balanced rows and sticks while
+  browsing; on phones (five rows) and short windows it scrolls with the page so it never covers products.
+  Product cards' scroll margin keeps keyboard focus clear of the stuck bar. Changing a category while deep
+  in the results brings the search/results area back into view, rather than the page header.
 - The empty state resets both query and category. Closing product details preserves both filters.
   Removing a category from the URL also resets the active filter.
 - Product cards share image/name/price/action areas. Existing alpha-derived dessert scale corrections
   are now actually applied. The full card is a single keyboard and pointer target.
 - Larger, two-line restaurant typography gives the lower section a clearer focal point; the real map
   search and Instagram link remain the only external journeys. There are no invented addresses or offers.
+- Home restaurant + social sections rebuilt to the owner's 2026-10-02 mockup. Restaurant band: two-line
+  "Envie de croquer / près de chez vous ?", "Trouver un restaurant" + "Ouvrir dans Google Maps", the owner's
+  campaign box art, pins and the "Du goût. Du vrai." note (desktop). Up to four restaurant cards appear
+  automatically once confirmed entries exist (`src/lib/restaurants.ts`; the CTA then reads "Voir nos
+  adresses", and `/restaurants` lists them all). Social band "Suivez le crunch.": one card per configured
+  network (Instagram today; TikTok once `brand.tiktok` is set) with decorative food tiles — product photos
+  plus campaign art, never presented as posts. Campaign art and the derived WebP files are described in
+  `212-chicken-assets/campaign/README.md` and `asset-mapping.md`.
 
 ## Motion that is implemented
 

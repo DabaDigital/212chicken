@@ -22,6 +22,8 @@ export function Hero() {
     "--art-y1": heroBounds.y1,
   } as CSSProperties;
 
+  // Source order is the phone order (headline → burger → burger controls → actions); from 768px the
+  // burger moves beside the copy and the controls drop below the actions.
   return (
     <section className={styles.hero} aria-labelledby="hero-title" data-hero>
       <div className={`container ${styles.grid}`}>
@@ -39,27 +41,6 @@ export function Hero() {
             </span>
           </h1>
           <p className={styles.lead}>{site.copy.hero_description}</p>
-          <div className={styles.actions}>
-            <PillLink href="/carte" size="lg" block="mobile">
-              {site.copy.primary_cta}
-            </PillLink>
-            <Link href="/restaurants" className={styles.secondary}>
-              <MapPin className={styles.pin} size={22} strokeWidth={2.25} aria-hidden="true" />
-              <span className={styles.secondaryLabel}>{site.copy.secondary_cta}</span>
-              <ArrowRight className={styles.secondaryArrow} size={18} strokeWidth={2.25} aria-hidden="true" />
-            </Link>
-          </div>
-          <div className={styles.motionControls} data-burger-controls>
-            <button type="button" className={styles.crunchButton} data-burger-toggle aria-controls="burger-scene" aria-pressed="true">
-              <span className={styles.crunchIcon}><Expand size={18} aria-hidden="true" /></span>
-              <span data-burger-label>Assembler le burger</span>
-            </button>
-            <span className={styles.controlDivider} aria-hidden="true" />
-            <button type="button" className={styles.pauseButton} data-burger-pause aria-label="Mettre l’animation en pause" aria-pressed="false">
-              <Pause size={15} data-pause-icon aria-hidden="true" />
-              <Play size={15} data-play-icon aria-hidden="true" />
-            </button>
-          </div>
         </div>
 
         <div className={styles.art} style={boundsStyle} data-hero-art>
@@ -87,6 +68,7 @@ export function Hero() {
                   alt="Burger au poulet croustillant en suspension : pain au sésame, salade, tomate, cheddar et poulet pané."
                   sizes={artSizes}
                   quality={65}
+                  // LCP image: React hoists a fetchpriority=high preload into <head> (`preload` would not).
                   loading="eager"
                   fetchPriority="high"
                   className={`${styles.layer} ${styles.photo}`}
@@ -139,6 +121,30 @@ export function Hero() {
             </div>
           </div>
           <button type="button" className={styles.burgerHit} data-burger-hit aria-label="Animer le burger" aria-controls="burger-scene" title="Cliquez pour faire claquer le burger" />
+        </div>
+
+        <div className={styles.cta}>
+          <div className={styles.motionControls} data-burger-controls>
+            <button type="button" className={styles.crunchButton} data-burger-toggle aria-controls="burger-scene" aria-pressed="true">
+              <span className={styles.crunchIcon}><Expand size={18} aria-hidden="true" /></span>
+              <span data-burger-label>Assembler le burger</span>
+            </button>
+            <span className={styles.controlDivider} aria-hidden="true" />
+            <button type="button" className={styles.pauseButton} data-burger-pause aria-label="Mettre l’animation en pause" aria-pressed="false">
+              <Pause size={15} data-pause-icon aria-hidden="true" />
+              <Play size={15} data-play-icon aria-hidden="true" />
+            </button>
+          </div>
+          <div className={styles.actions}>
+            <PillLink href="/carte" size="lg" block="mobile">
+              {site.copy.primary_cta}
+            </PillLink>
+            <Link href="/restaurants" className={styles.secondary}>
+              <MapPin className={styles.pin} size={22} strokeWidth={2.25} aria-hidden="true" />
+              <span className={styles.secondaryLabel}>{site.copy.secondary_cta}</span>
+              <ArrowRight className={styles.secondaryArrow} size={18} strokeWidth={2.25} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

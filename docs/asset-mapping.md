@@ -24,8 +24,23 @@ The single resolver for browser URLs is `assetUrl()` in `src/lib/assets.ts`. Dat
 | `images/brand/logo.png` | `/212/images/brand/logo.png` | Organization JSON-LD logo; source of the app icons and the social card |
 | `images/hero/burger-exploded.webp` (1254², alpha) | `/212/images/hero/burger-exploded.webp` | Home hero (static frame, LCP) |
 | `images/hero/burger-assembled.webp` (1254², alpha) | `/212/images/hero/burger-assembled.webp` | `/restaurants` illustration |
-| `images/decor/floating-fries.webp` (1254², alpha) | `/212/images/decor/floating-fries.webp` | Decoration in the orange "Nos restaurants" band (≥ 768px) |
-| `images/menu/webp/<id>.webp` × 25 (800², alpha) | `/212/images/menu/webp/<id>.webp` | Product cards and product dialog, mapped by `products[].image` |
+| `images/decor/floating-fries.webp` (1254², alpha) | `/212/images/decor/floating-fries.webp` | Copied, currently unused (the restaurant band now uses the campaign box art) |
+| `images/menu/webp/<id>.webp` × 25 (800², alpha) | `/212/images/menu/webp/<id>.webp` | Product cards and product dialog, mapped by `products[].image`; four also decorate the social band tiles |
+| `restaurants[].photo` (only entries with `"verified": true`) | `/212/<photo>` | Storefront photo on that restaurant's card; none in the snapshot |
+
+## Campaign art supplied by the owner (2026-10-02)
+
+Kept beside the pack in `212-chicken-assets/campaign/` (byte-for-byte, provenance in its README) and converted
+by `scripts/derive-assets.mjs`: trimmed to the visible pixels, WebP q90; sizes recorded in
+`src/generated/asset-metrics.json`, exposed as `campaignImages` in `src/lib/assets.ts`.
+
+| Master | Public URL | Used for |
+|---|---|---|
+| `box-explosion.png` (1433×1098) | `/212/images/campaign/box-explosion.webp` (1265×1086) | Home restaurant band art |
+| `tenders-dip.png` (1024×1536) | `/212/images/campaign/tenders-dip.webp` (1024×1273) | Social band tile (cropped to the tile) |
+| `box-and-cup.png` (1536×1024) | `/212/images/campaign/cup.webp` (392×759) | Social band tile: the cup only, lifted out along its own transparent outline |
+
+The four generated storefront images supplied the same day are not published (see the campaign README).
 
 Images are served through `next/image` (`/_next/image`) as AVIF (WebP fallback) at responsive widths.
 Quality 75 for product photos; 65 for the large campaign burger frames only (`next.config.ts` → `images.qualities`).

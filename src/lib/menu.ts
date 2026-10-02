@@ -130,3 +130,14 @@ export function getHomeSelection(): HomeSelection {
   }
   return { filters, items: selectionItems, totalProducts: items.length };
 }
+
+/**
+ * Product photos for decorative compositions (restaurant band collage, social tiles), resolved
+ * through menu.json so the paths stay single-sourced. Unknown ids are skipped.
+ */
+export function getProductPhotos(ids: readonly string[]): MenuItem["image"][] {
+  return ids.flatMap((id) => {
+    const item = items.find((candidate) => candidate.id === id);
+    return item ? [item.image] : [];
+  });
+}

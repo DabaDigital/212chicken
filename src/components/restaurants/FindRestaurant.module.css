@@ -1,27 +1,35 @@
-/* Solid brand-orange surface with ink text (5.5:1). Focus rings switch to ink here. */
+/*
+ * Brand-orange band. Ink text on orange is 5.5:1. Cream is used only for large display text
+ * (title line 2, desktop note ≥ 24px): 3.1:1, WCAG AA for large text. Focus rings switch to ink.
+ */
 .band {
   --focus-color: var(--ink);
+  --content-w: min(100vw - 2 * var(--gutter), 1680px);
+  --container: 1680px;
 
   position: relative;
-  overflow: hidden;
+  z-index: 2;
   background: var(--orange);
   color: var(--ink);
 }
 
 .inner {
-  position: relative;
   display: grid;
-  align-items: center;
-  padding-block: clamp(3rem, 7vw, 5.5rem);
+  grid-template-areas:
+    "head"
+    "body"
+    "art"
+    "cards";
+  gap: 1.25rem 2rem;
+  padding-block: clamp(3rem, 7vw, 6rem) clamp(2rem, 3vw, 3.5rem);
 }
 
-.text {
+.head {
   position: relative;
   z-index: 1;
+  grid-area: head;
   display: grid;
-  justify-items: start;
-  gap: 1.5rem;
-  max-width: 40rem;
+  gap: 0.875rem;
 }
 
 .eyebrow {
@@ -31,11 +39,33 @@
   text-transform: uppercase;
 }
 
+/*
+ * The widest line, "près de chez vous ?", measures 8.03em in Anton: size = available width ÷ 8.2,
+ * which keeps both lines whole down to 320px (where it is ~34px, still large display text).
+ */
 .title {
   font-family: var(--font-display);
-  font-size: clamp(3.75rem, 2rem + 7vw, 8.5rem);
+  font-size: min(var(--content-w) / 8.2, 4.5rem);
   font-weight: 400;
-  line-height: 1.06;
+  line-height: 1.08;
+}
+
+.line {
+  display: block;
+  text-wrap: balance;
+}
+
+.lineCream {
+  color: var(--cream);
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  grid-area: body;
+  display: grid;
+  justify-items: start;
+  gap: 1.5rem;
 }
 
 .lead {
@@ -49,43 +79,201 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem 1.75rem;
+  gap: 0.75rem 1rem;
+  width: 100%;
+}
+
+.maps {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 48px;
+  padding: 0.5rem 1.375rem 0.5rem 1.125rem;
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 2px var(--ink);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background-color var(--dur-hover) ease,
+    color var(--dur-hover) ease;
+}
+
+.maps:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.maps:active {
+  transform: translateY(1px);
+}
+
+/* Decorative art: the campaign illustration sets the box; pins and note sit in % of it. */
+.art {
+  grid-area: art;
+  position: relative;
+  justify-self: center;
+  width: min(100%, 26rem);
   margin-top: 0.5rem;
 }
 
-.link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: var(--target);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.link span {
-  padding-bottom: 2px;
-  border-bottom: 2px solid currentColor;
-}
-
-.decor {
-  display: none;
-}
-
-.fries {
+.feast {
   width: 100%;
   height: auto;
 }
 
+.piece {
+  position: absolute;
+}
+
+.pin {
+  width: 100%;
+  height: auto;
+  color: var(--ink);
+}
+
+.pinHole {
+  fill: var(--orange);
+}
+
+/* Parallax moves the .piece wrappers; rotations stay on the children so GSAP never folds them in. */
+.pinA {
+  top: 4%;
+  left: 3%;
+  width: 6.5%;
+}
+
+.pinA .pin {
+  rotate: -10deg;
+}
+
+.pinB {
+  top: 62%;
+  right: 1%;
+  width: 5%;
+}
+
+.pinB .pin {
+  rotate: 12deg;
+}
+
+.note {
+  display: none;
+}
+
+.cards {
+  grid-area: cards;
+  position: relative;
+  z-index: 2;
+  margin-top: 2rem;
+}
+
+@media (max-width: 47.99rem) {
+  .actions > * {
+    width: 100%;
+  }
+}
+
 @media (min-width: 48rem) {
   .inner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.55fr);
-    gap: 2rem;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-areas:
+      "head head"
+      "body art"
+      "cards cards";
+    align-items: center;
   }
 
-  .decor {
-    display: block;
-    width: min(100%, 24rem);
-    margin: -3rem -1rem -3rem auto;
-    rotate: -8deg;
+  .title {
+    font-size: min(var(--display-l), var(--content-w) / 8.2);
+  }
+
+  .line {
+    white-space: nowrap;
+  }
+
+  .art {
+    width: 100%;
+    margin-block: -1rem -2rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-rows: min-content minmax(0, 1fr) auto;
+    grid-template-areas:
+      "head art"
+      "body art"
+      "cards cards";
+    align-content: center;
+    column-gap: 0;
+  }
+
+  .head {
+    align-self: start;
+    padding-left: clamp(0rem, 3vw, 3.5rem);
+  }
+
+  .body {
+    align-self: start;
+    padding-left: clamp(0rem, 3vw, 3.5rem);
+  }
+
+  /* Copy column = 1.15 / 2 of the content width after the 4rem gap. */
+  .title {
+    font-size: min(6.5rem, (var(--content-w) * 0.525 - 3.5rem) / 8.2);
+  }
+
+  /* The art may bleed into the right gutter, as in the approved mockup (the band clips overflow). */
+  .art {
+    justify-self: end;
+    width: min(115%, 56rem);
+    margin-block: -10rem -4rem;
+    margin-right: 0;
+  }
+
+  .note {
+    position: absolute;
+    top: 12%;
+    right: 3%;
+    display: grid;
+    justify-items: center;
+    gap: 0.125rem;
+    color: var(--cream);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 0.9rem + 0.9vw, 1.875rem);
+    line-height: 1.02;
+    text-align: center;
+    text-transform: uppercase;
+    rotate: 9deg;
+    font-style: italic;
+  }
+
+  .pinA {
+    top: 55%;
+    left: 1%;
+    width: 4%;
+    opacity: 0.35;
+  }
+
+  .pinB {
+    top: 47%;
+    opacity: 0.35;
+  }
+
+  .noteArrow {
+    position: absolute;
+    top: 55%;
+    right: 100%;
+    width: 3.75rem;
+    height: auto;
+    margin-right: 0.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3.5;
   }
 }

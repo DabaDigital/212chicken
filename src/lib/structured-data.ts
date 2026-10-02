@@ -1,7 +1,7 @@
 import "server-only";
 
 import { brandImages } from "./assets";
-import { site, siteUrl } from "./site";
+import { site, siteUrl, socialLinks } from "./site";
 
 /**
  * Factual, site-wide structured data only: the brand (Organization) and the website.
@@ -10,6 +10,7 @@ import { site, siteUrl } from "./site";
 export function organizationJsonLd(): Record<string, unknown> | null {
   if (!siteUrl) return null;
   const home = siteUrl.toString();
+  const sameAs = socialLinks.map((link) => link.url);
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -24,7 +25,7 @@ export function organizationJsonLd(): Record<string, unknown> | null {
           width: brandImages.logoPng.width,
           height: brandImages.logoPng.height,
         },
-        ...(site.instagram ? { sameAs: [site.instagram.url] } : {}),
+        ...(sameAs.length ? { sameAs } : {}),
       },
       {
         "@type": "WebSite",

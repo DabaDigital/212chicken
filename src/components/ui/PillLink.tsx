@@ -9,7 +9,7 @@ interface PillLinkProps {
   children: ReactNode;
   /** Shorter label shown on narrow screens (the full label stays available on wider ones). */
   shortLabel?: string;
-  variant?: "dark" | "cream";
+  variant?: "dark" | "cream" | "outline";
   size?: "md" | "lg";
   external?: boolean;
   /** Stretch to the full width of the parent (used for the mobile hero CTA). */

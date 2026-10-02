@@ -1,5 +1,7 @@
+/* Scroll margins (+ the page's 1.5rem scroll padding) keep focused cards and their ring clear of the
+   two-row sticky category bar on /carte (≈ 125px). */
 .card {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: 7.5rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -52,7 +54,7 @@
 }
 
 .trigger {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: 7.5rem;
   padding: 0;
   border: 0;
   background: none;

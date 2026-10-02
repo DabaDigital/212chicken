@@ -8,8 +8,10 @@
  *    layers recompose the original frame exactly (verified below, the build fails otherwise).
  * 2. Visual bounds (alpha bounding boxes) used to size art without cropping ingredient edges, and
  *    per-photo scale factors for product photos with unusually large transparent padding.
+ * 3. Campaign art supplied by the owner, trimmed and converted to WebP (see deriveCampaignArt).
  *
- * Output: public/212/images/hero/layers/*.webp and src/generated/asset-metrics.json.
+ * Output: public/212/images/hero/layers/*.webp, public/212/images/campaign/*.webp and
+ * src/generated/asset-metrics.json.
  */
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -24,7 +26,8 @@ async function rawRgba(file) {
   return { data, width: info.width, height: info.height };
 }
 
-function alphaBounds(data, width, height, threshold = ALPHA_SOLID) {
+/** Inclusive pixel box of the pixels whose alpha exceeds `threshold` (x1 = -1 when there are none). */
+function pixelBounds(data, width, height, threshold = ALPHA_SOLID) {
   let x0 = width, y0 = height, x1 = -1, y1 = -1;
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
@@ -36,6 +39,11 @@ function alphaBounds(data, width, height, threshold = ALPHA_SOLID) {
       }
     }
   }
+  return { x0, y0, x1, y1 };
+}
+
+function alphaBounds(data, width, height, threshold = ALPHA_SOLID) {
+  const { x0, y0, x1, y1 } = pixelBounds(data, width, height, threshold);
   const r = (v) => Math.round(v * 1000) / 1000;
   return { x0: r(x0 / width), y0: r(y0 / height), x1: r((x1 + 1) / width), y1: r((y1 + 1) / height) };
 }
@@ -161,6 +169,76 @@ async function deriveHeroLayers(assetRoot, publicDir) {
   };
 }
 
+/**
+ * Campaign art supplied by the owner (212-chicken-assets/campaign/, see its README): trimmed to the
+ * visible pixels and converted to WebP. `isolate: "rightmost"` keeps only the right-hand subject of a
+ * composition: its largest component in the right 30% plus every component starting at or right of
+ * it. The cup thus leaves the box-and-cup art whole, splash included, and no neighbouring food is cut.
+ */
+const CAMPAIGN_ART = [
+  { id: "boxExplosion", source: "box-explosion.png", output: "images/campaign/box-explosion.webp" },
+  { id: "tendersDip", source: "tenders-dip.png", output: "images/campaign/tenders-dip.webp" },
+  { id: "cup", source: "box-and-cup.png", output: "images/campaign/cup.webp", isolate: "rightmost" },
+  { id: "neon", source: "neon-good-mood.png", output: "images/campaign/neon-good-mood.webp" },
+];
+const TRIM_ALPHA = 8;
+const TRIM_PADDING = 6;
+
+function isolateRightmost(data, width, height) {
+  const { label, sizes } = labelComponents(data, width, height);
+  const spans = sizes.map(() => ({ x0: width, x1: -1 }));
+  for (let i = 0; i < width * height; i++) {
+    const span = spans[label[i]];
+    if (!span) continue;
+    const x = i % width;
+    if (x < span.x0) span.x0 = x;
+    if (x > span.x1) span.x1 = x;
+  }
+  const subject = spans
+    .map((span, id) => ({ ...span, size: sizes[id] }))
+    .filter((span) => (span.x0 + span.x1) / 2 > width * 0.7)
+    .sort((a, b) => b.size - a.size)[0];
+  if (!subject) throw new Error("campaign art: no subject in the right 30% of the composition");
+  const out = Buffer.alloc(data.length);
+  for (let i = 0; i < width * height; i++) {
+    const span = spans[label[i]];
+    if (span && span.x0 >= subject.x0) data.copy(out, i * 4, i * 4, i * 4 + 4);
+  }
+  return out;
+}
+
+async function deriveCampaignArt(campaignRoot, publicDir) {
+  const art = {};
+  let written = 0;
+  for (const { id, source, output, isolate } of CAMPAIGN_ART) {
+    const file = path.join(campaignRoot, source);
+    if (!existsSync(file)) throw new Error(`campaign art: missing ${file}`);
+    const raw = await rawRgba(file);
+    const { width, height } = raw;
+    const corners = [0, width - 1, (height - 1) * width, height * width - 1].map((i) => raw.data[i * 4 + 3]);
+    if (corners.every((alpha) => alpha === 255)) throw new Error(`campaign art: ${source} needs a transparent background`);
+
+    const data = isolate === "rightmost" ? isolateRightmost(raw.data, width, height) : raw.data;
+    const box = pixelBounds(data, width, height, TRIM_ALPHA);
+    if (box.x1 < 0) throw new Error(`campaign art: ${source} has no visible pixels`);
+    const left = Math.max(0, box.x0 - TRIM_PADDING);
+    const top = Math.max(0, box.y0 - TRIM_PADDING);
+    const crop = {
+      left,
+      top,
+      width: Math.min(width, box.x1 + 1 + TRIM_PADDING) - left,
+      height: Math.min(height, box.y1 + 1 + TRIM_PADDING) - top,
+    };
+    const webp = await sharp(data, { raw: { width, height, channels: 4 } })
+      .extract(crop)
+      .webp({ quality: 90, alphaQuality: 100, effort: 5 })
+      .toBuffer();
+    if (await writeIfChanged(path.join(publicDir, output), webp)) written++;
+    art[id] = { source, path: output, width: crop.width, height: crop.height };
+  }
+  return { art, files: CAMPAIGN_ART.map((entry) => entry.output), written };
+}
+
 /** Scale factor for product photos whose subject fills < 80% of the square (e.g. small desserts). */
 async function deriveProductScales(assetRoot, products) {
   const scales = {};
@@ -179,15 +257,23 @@ async function deriveProductScales(assetRoot, products) {
   return { productImageScale: scales, productBounds: bounds };
 }
 
-export async function deriveAssets({ assetRoot, publicDir, generatedFile, products }) {
+export async function deriveAssets({ assetRoot, campaignRoot, publicDir, generatedFile, products }) {
   const hero = await deriveHeroLayers(assetRoot, publicDir);
+  const campaign = await deriveCampaignArt(campaignRoot, publicDir);
   const productMetrics = await deriveProductScales(assetRoot, products);
   const metrics = {
     heroBounds: hero.heroBounds,
     heroLayers: hero.heroLayers,
     productImageScale: productMetrics.productImageScale,
+    campaign: campaign.art,
   };
   const json = Buffer.from(`${JSON.stringify(metrics, null, 2)}\n`);
   const metricsChanged = await writeIfChanged(generatedFile, json);
-  return { files: hero.files, written: hero.written, metricsChanged, scaled: Object.keys(productMetrics.productImageScale) };
+  return {
+    files: hero.files,
+    written: hero.written,
+    campaign: { files: campaign.files, written: campaign.written },
+    metricsChanged,
+    scaled: Object.keys(productMetrics.productImageScale),
+  };
 }

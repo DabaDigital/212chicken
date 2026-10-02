@@ -12,8 +12,10 @@ at build time and fail the build on malformed data (`src/lib/source-data.ts`).
 | Menu supplement (+16 MAD) | Product dialog, "Supplément menu : +16 DH" | Shown where `menu_upgrade_price` exists; its contents are never described |
 | 8 source categories + proposed `wraps` | Category filters / groups | Generated from the data, so no product can disappear |
 | Hero lines, description, CTA labels, "À chacun son crunch." | Home | `website.json → proposed_copy` |
-| Instagram `@212_chicken_maroc` | Header menu (mobile), home band, footer, `/restaurants`, JSON-LD `sameAs` | From `brand.instagram` |
+| Instagram `@212_chicken_maroc` | Header menu (mobile), home social band, footer, `/restaurants`, JSON-LD `sameAs` | From `brand.instagram` |
+| TikTok | Home social band, footer, JSON-LD `sameAs` | Only once `brand.tiktok` is set (absent from the snapshot) |
 | Google Maps search | Home band, `/restaurants` | `links.restaurant_search`, labelled as a general search (no "nearest restaurant" claim) |
+| Restaurant cards | Home band (first four), `/restaurants` | Only entries with `"verified": true` (none in the snapshot), see below |
 
 Not published: phone numbers (the source shows `+212 6 00 00 00 00` but calls `+33983489459`), hours,
 addresses, availability, allergens, calories, reviews, reels, promotions, delivery or ordering. Null values are
@@ -42,12 +44,41 @@ Home "selection" (not "best sellers": no sales evidence): Royal Crunch Double, L
 Mockup labels not reproduced: "Sides" (no such category in the data) and the "L'esprit 212" nav item (no content).
 "Commander" is not shown: there is no verified ordering URL (see below).
 
+## Adding restaurants and TikTok (no code change needed)
+
+Restaurant cards (home band: first four; `/restaurants`: all) are generated from `data/website.json →
+restaurants`. An entry is published only with `"verified": true`; a verified entry with a missing or
+malformed field fails the build, and unverified entries are skipped with a build warning.
+
+```json
+{
+  "id": "maarif",
+  "name": "Maarif",
+  "address": "Avenue …",
+  "city": "Casablanca",
+  "maps_url": "https://maps.app.goo.gl/…",
+  "hours": "10h – 00h",
+  "services": ["sur_place", "a_emporter", "livraison"],
+  "photo": "images/restaurants/maarif.webp",
+  "verified": true
+}
+```
+
+`hours`, `services` and `photo` are optional (omit what is not confirmed). `maps_url` must be that
+restaurant's own https map listing. `photo` is a real storefront photo placed in the pack under `images/`
+(it is copied by `npm run assets`); without one the card shows the logo. Do not use generated storefront
+images: they show invented premises and signage. Restaurant JSON-LD is still not emitted.
+
+TikTok: add `"tiktok": "https://www.tiktok.com/@handle"` to `brand`. The social band, footer and
+Organization `sameAs` pick it up; the handle is read from the URL.
+
 ## Launch blockers (owner input needed)
 
 From `website.json → missing_before_launch` and the per-product `needs_review` notes:
 
-1. **Restaurant list**: addresses, coordinates and opening hours per restaurant (`restaurants: []`). Until then
-   `/restaurants` only offers the Google Maps search. Do not add `Restaurant` JSON-LD before this is verified.
+1. **Restaurant list**: addresses, map links, opening hours, services and storefront photos per restaurant
+   (`restaurants: []`, format above). Until then the home band and `/restaurants` only offer the Google Maps
+   search. Do not add `Restaurant` JSON-LD before this is verified.
 2. **Official phone number**: source text and call link disagree; neither is published.
 3. **Ordering URL / service** (`links.ordering: null`). Once set to an https URL, the header CTA and the product
    dialog switch to "Commander" automatically.
@@ -57,6 +88,9 @@ From `website.json → missing_before_launch` and the per-product `needs_review`
 7. **Royal 212 Wistor** in "Wraps": confirm the proposed re-categorisation (source lists it under Burgers).
 8. **New products**: photos and details for items missing from the source catalogue.
 9. **Reels and reviews**: real links and usage permission (nothing is rendered while the lists are empty).
+   The social band's food tiles are decoration, not posts.
 10. **Prices**: re-check against the live menu just before launch (snapshot date 2026-09-30).
 11. **Production URL**: confirm the domain (`SITE_URL`) and set `SITE_INDEXABLE=true` on production only.
-12. **Copy sign-off**: hero lines, "À chacun son crunch." intro, "Envie de croquer ?" band, 404 copy.
+12. **Copy sign-off**: hero lines, "À chacun son crunch." intro, "Envie de croquer près de chez vous ?" band,
+    "Suivez le crunch." band and its "Rejoignez la communauté 212 Chicken !" callout, 404 copy.
+13. **TikTok**: the brand's official profile URL, if one exists (nothing is shown until it is supplied).

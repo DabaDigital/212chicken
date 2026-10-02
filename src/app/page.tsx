@@ -1,6 +1,6 @@
 import { Hero } from "@/components/home/Hero";
-import { InstagramBand } from "@/components/home/InstagramBand";
 import { Ribbon } from "@/components/home/Ribbon";
+import { SocialBand } from "@/components/home/SocialBand";
 import { FeaturedMenu } from "@/components/menu/FeaturedMenu";
 import { MotionGate } from "@/components/motion/MotionGate";
 import { FindRestaurant } from "@/components/restaurants/FindRestaurant";
@@ -41,7 +41,7 @@ export default function HomePage() {
       </section>
 
       <FindRestaurant />
-      <InstagramBand />
+      <SocialBand />
     </MotionGate>
   );
 }

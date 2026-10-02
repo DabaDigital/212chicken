@@ -5,8 +5,9 @@ import { sourceWebsite } from "./source-data";
 /**
  * Production configuration (see .env.example / docs/content-and-launch.md):
  * - SITE_URL       absolute https origin used for canonicals, sitemap, Open Graph and JSON-LD.
- * - SITE_INDEXABLE "true" only for the production deployment. Anything else emits noindex
- *                  and a disallow-all robots.txt, which keeps previews out of search engines.
+ * - Vercel production uses its stable production domain and permits indexing by default.
+ * - SITE_INDEXABLE=false opts out; Vercel previews always stay non-indexable.
+ * - Other hosts require SITE_URL and SITE_INDEXABLE=true.
  */
 function parseSiteUrl(raw: string | undefined): URL | null {
   if (!raw) return null;
@@ -36,10 +37,15 @@ function parseExternalUrl(raw: string | null | undefined): string | null {
   }
 }
 
-export const siteUrl = parseSiteUrl(process.env.SITE_URL);
+const isVercelProduction = process.env.VERCEL_ENV === "production";
+const isVercelPreview = Boolean(process.env.VERCEL_ENV) && !isVercelProduction;
+export const siteUrl = parseSiteUrl(process.env.SITE_URL ||
+  (isVercelProduction && process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined));
 
-/** Indexing requires both the explicit flag and a validated public https origin. */
-export const isIndexable = process.env.SITE_INDEXABLE === "true" && siteUrl?.protocol === "https:";
+/** Never index preview deployments, even if they inherit production environment settings. */
+export const isIndexable = !isVercelPreview && Boolean(siteUrl) &&
+  (process.env.SITE_INDEXABLE === undefined ? isVercelProduction : process.env.SITE_INDEXABLE === "true");
 
 export function absoluteUrl(pathname: string): string | null {
   return siteUrl ? new URL(pathname, siteUrl).toString() : null;
@@ -48,15 +54,41 @@ export function absoluteUrl(pathname: string): string | null {
 const instagramUrl = parseExternalUrl(sourceWebsite.brand.instagram);
 const instagramHandle = instagramUrl ? new URL(instagramUrl).pathname.split("/").filter(Boolean)[0] ?? null : null;
 
+// TikTok profile URLs carry the handle as an "@name" path segment.
+const tiktokUrl = parseExternalUrl(sourceWebsite.brand.tiktok);
+const tiktokHandle = tiktokUrl
+  ? new URL(tiktokUrl).pathname.split("/").find((segment) => /^@[\w.]+$/.test(segment)) ?? null
+  : null;
+
+export interface SocialProfile {
+  url: string;
+  handle: string;
+}
+
+export interface SocialLink extends SocialProfile {
+  id: "instagram" | "tiktok";
+  label: string;
+}
+
+const instagram: SocialProfile | null =
+  instagramUrl && instagramHandle ? { url: instagramUrl, handle: `@${instagramHandle}` } : null;
+const tiktok: SocialProfile | null = tiktokUrl && tiktokHandle ? { url: tiktokUrl, handle: tiktokHandle } : null;
+
 export const site = {
   name: sourceWebsite.brand.name,
   locale: sourceWebsite.brand.locale,
   copy: sourceWebsite.proposed_copy,
-  instagram: instagramUrl && instagramHandle ? { url: instagramUrl, handle: `@${instagramHandle}` } : null,
+  instagram,
+  /** Official profile supplied by the owner (2026-10-02); null when website.json has none. */
+  tiktok,
   /** General Google Maps search supplied by the brand, not a nearest-store detection. */
   restaurantSearchUrl: parseExternalUrl(sourceWebsite.links.restaurant_search),
   /** null until the owner supplies a verified ordering destination. */
   orderingUrl: parseExternalUrl(sourceWebsite.links.ordering),
-  /** Only verified restaurant records may ever be rendered (currently none supplied). */
-  restaurants: sourceWebsite.restaurants,
 } as const;
+
+/** The brand's official accounts in display order: only those configured in website.json. */
+export const socialLinks: SocialLink[] = [
+  ...(instagram ? [{ id: "instagram" as const, label: "Instagram", ...instagram }] : []),
+  ...(tiktok ? [{ id: "tiktok" as const, label: "TikTok", ...tiktok }] : []),
+];

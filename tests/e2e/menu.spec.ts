@@ -120,10 +120,27 @@ test.describe("La carte", () => {
     await expect(page).toHaveURL(/\/carte$/);
   });
 
-  test("scrolling category controls stay reachable and reorient to filtered results", async ({ page }) => {
+  test("wraps every category into view, with no sideways scrolling", async ({ page }) => {
+    await page.goto("/carte");
+    const filters = page.getByRole("group", { name: "Catégories" });
+    expect(await filters.evaluate((group) => group.scrollWidth - group.clientWidth)).toBeLessThanOrEqual(0);
+    const viewportWidth = page.viewportSize()!.width;
+    for (const button of await filters.getByRole("button").all()) {
+      const box = (await button.boundingBox())!;
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(viewportWidth);
+    }
+  });
+
+  test("the category bar follows the grid on wide screens and reorients to filtered results", async ({ page, isMobile }) => {
     await page.goto("/carte");
     await productCards(page).last().scrollIntoViewIfNeeded();
     const filters = page.getByRole("group", { name: "Catégories" });
+    if (isMobile) {
+      // Five wrapped rows would cover the products on a phone, so the bar scrolls away with the page.
+      await expect(filters).not.toBeInViewport();
+      return;
+    }
     const bounds = await filters.boundingBox();
     expect(bounds?.y).toBeLessThan(30);
     await filters.getByRole("button", { name: /^Wraps/ }).click();

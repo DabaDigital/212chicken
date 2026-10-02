@@ -43,7 +43,16 @@ export interface SourceMenu {
 }
 
 export interface SourceWebsite {
-  brand: { name: string; website: string; logo: string; instagram: string; locale: string; currency: string };
+  brand: {
+    name: string;
+    website: string;
+    logo: string;
+    instagram: string;
+    /** Not in the 2026-09-30 snapshot; add the brand's verified TikTok profile URL to show it. */
+    tiktok?: string | null;
+    locale: string;
+    currency: string;
+  };
   proposed_copy: {
     hero_lines: string[];
     hero_description: string;

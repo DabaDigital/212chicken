@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 
 /*
  * Reduced motion and no-JS keep the intact server-rendered image. The optional controller loads
@@ -22,10 +22,38 @@ const getServerSnapshot = () => false;
 
 export function MotionGate({ children }: { children: ReactNode }) {
   const enabled = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const root = useRef<HTMLDivElement>(null);
+  const [painted, setPainted] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    let frame = 0;
+    let idle: number | undefined;
+    const start = async () => {
+      const photo = root.current?.querySelector<HTMLImageElement>("[data-hero-photo]");
+      try { await photo?.decode(); } catch { /* Keep enhancement available after a failed photo. */ }
+      if (cancelled) return;
+      // Give the intact artwork a paint before fetching the optional animation and its images.
+      frame = requestAnimationFrame(() => {
+        frame = requestAnimationFrame(() => {
+          if ("requestIdleCallback" in window) {
+            idle = window.requestIdleCallback(() => { if (!cancelled) setPainted(true); });
+          } else if (!cancelled) setPainted(true);
+        });
+      });
+    };
+    if (document.readyState === "complete") void start();
+    else window.addEventListener("load", start, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", start);
+      cancelAnimationFrame(frame);
+      if (idle !== undefined) window.cancelIdleCallback(idle);
+    };
+  }, []);
   return (
-    <div>
+    <div ref={root}>
       {children}
-      {enabled ? <PageMotion /> : null}
+      {enabled && painted ? <PageMotion /> : null}
     </div>
   );
 }

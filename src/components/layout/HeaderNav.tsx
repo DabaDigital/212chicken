@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { PillLink } from "@/components/ui/PillLink";
+import type { SocialLink } from "@/lib/site";
 
 import { MobileMenu, type NavItem } from "./MobileMenu";
 import styles from "./SiteHeader.module.css";
@@ -15,7 +16,7 @@ const NAV_ITEMS: NavItem[] = [
 
 interface HeaderNavProps {
   orderingUrl: string | null;
-  instagram: { url: string; handle: string } | null;
+  socials: SocialLink[];
   logo: { src: string; width: number; height: number };
 }
 
@@ -23,7 +24,7 @@ export function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function HeaderNav({ orderingUrl, instagram, logo }: HeaderNavProps) {
+export function HeaderNav({ orderingUrl, socials, logo }: HeaderNavProps) {
   const pathname = usePathname() ?? "/";
 
   // "Commander" only exists with a verified ordering destination. Without it the header points to
@@ -55,7 +56,7 @@ export function HeaderNav({ orderingUrl, instagram, logo }: HeaderNavProps) {
         <PillLink href={cta.href} shortLabel={cta.short} external={cta.external} className={styles.cta}>
           {cta.label}
         </PillLink>
-        <MobileMenu items={NAV_ITEMS} pathname={pathname} instagram={instagram} logo={logo} />
+        <MobileMenu items={NAV_ITEMS} pathname={pathname} socials={socials} logo={logo} />
       </div>
     </>
   );

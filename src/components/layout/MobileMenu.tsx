@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
-import { InstagramIcon } from "@/components/ui/InstagramIcon";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 import { trapTabKey } from "@/components/ui/trapTabKey";
+import type { SocialLink } from "@/lib/site";
 
 import styles from "./MobileMenu.module.css";
 
@@ -18,7 +19,7 @@ export interface NavItem {
 interface MobileMenuProps {
   items: NavItem[];
   pathname: string;
-  instagram: { url: string; handle: string } | null;
+  socials: SocialLink[];
   logo: { src: string; width: number; height: number };
 }
 
@@ -26,7 +27,7 @@ interface MobileMenuProps {
  * Compact navigation for < 768px. A native modal <dialog> provides focus containment, an inert
  * page behind it and Escape handling; focus returns to the toggle when it closes.
  */
-export function MobileMenu({ items, pathname, instagram, logo }: MobileMenuProps) {
+export function MobileMenu({ items, pathname, socials, logo }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -115,15 +116,19 @@ export function MobileMenu({ items, pathname, instagram, logo }: MobileMenuProps
           </ul>
         </nav>
 
-        {instagram ? (
-          <div className={`container ${styles.bottom}`}>
-            <a href={instagram.url} className={styles.social} target="_blank" rel="noopener noreferrer">
-              <InstagramIcon size={22} />
-              <span>{instagram.handle}</span>
-              <ArrowUpRight size={18} aria-hidden="true" />
-              <span className="sr-only"> sur Instagram (nouvel onglet)</span>
-            </a>
-          </div>
+        {socials.length ? (
+          <ul role="list" className={`container ${styles.bottom}`}>
+            {socials.map((social) => (
+              <li key={social.id}>
+                <a href={social.url} className={styles.social} target="_blank" rel="noopener noreferrer">
+                  <SocialIcon id={social.id} size={22} />
+                  <span>{social.label}</span>
+                  <ArrowUpRight size={18} aria-hidden="true" />
+                  <span className="sr-only"> (nouvel onglet)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         ) : null}
       </dialog>
     </>
