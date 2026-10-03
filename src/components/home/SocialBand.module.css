@@ -234,6 +234,38 @@
   scale: var(--tile-scale, 1);
 }
 
+.play {
+  position: absolute;
+  right: 0.625rem;
+  bottom: 0.625rem;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: rgb(32 18 7 / 65%);
+  color: #fff;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 25%);
+  pointer-events: none;
+}
+
+.play svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  fill: currentColor;
+}
+
+.tile:hover .play,
+.tile:focus-visible .play {
+  background: var(--orange);
+}
+
+.tile:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
+}
+
 .tileCover {
   padding: 0;
   object-fit: cover;
@@ -291,5 +323,35 @@
 @container (min-width: 60rem) {
   .tile {
     aspect-ratio: 4 / 5;
+  }
+}
+
+/* A fan of portrait video covers, with the middle card rising above its neighbours. */
+.tiles[data-network] {
+  gap: clamp(0.625rem, 0.9vw, 1rem);
+  padding-inline: 0.5rem;
+  padding-block: 1rem 0.5rem;
+}
+
+.tiles[data-network] .tile {
+  aspect-ratio: 9 / 16;
+  transform-origin: center bottom;
+}
+
+.tiles[data-network] .tile:nth-child(1) {
+  rotate: -4deg;
+}
+
+.tiles[data-network] .tile:nth-child(2) {
+  aspect-ratio: 1 / 2;
+}
+
+.tiles[data-network] .tile:nth-child(3) {
+  rotate: 5deg;
+}
+
+@media (max-width: 39.99rem) {
+  .tiles[data-network] {
+    padding-inline: 0.75rem;
   }
 }

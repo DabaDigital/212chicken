@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 
+import { watchEngagement } from "./engagement";
+
 /*
  * Reduced motion and no-JS keep the intact server-rendered image. The optional controller loads
  * secondary artwork only when the burger enters the viewport; touch gets the same tap controls.
@@ -25,6 +27,8 @@ export function MotionGate({ children }: { children: ReactNode }) {
   const root = useRef<HTMLDivElement>(null);
   const [painted, setPainted] = useState(false);
   useEffect(() => {
+    // Remember early input: desktop layers wait for it, and PageMotion mounts only after load.
+    watchEngagement();
     let cancelled = false;
     let frame = 0;
     let idle: number | undefined;

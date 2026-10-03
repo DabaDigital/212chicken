@@ -1,5 +1,7 @@
 import gsap from "gsap";
 
+import { whenEngaged } from "./engagement";
+
 /** Photographic 2.5D: source frames and disjoint alpha layers. Transform ownership:
  * scroll → camera → float → explosion. No React renders on animation frames. */
 export function createBurgerMotion(hero: HTMLElement, context: gsap.Context) {
@@ -162,10 +164,17 @@ export function createBurgerMotion(hero: HTMLElement, context: gsap.Context) {
   };
   // Touch visitors get a fast, intact photo; their first tap loads and assembles the layers.
   if (!desktop) hero.dataset.burgerReady = "true";
+  // Desktop: in view and after the visitor's first input. The layers rest slightly larger than the
+  // intact photo (z-depth); revealing them unprompted would become a later LCP paint (engagement.ts).
+  let engaged = false;
+  const stopWaiting = desktop ? whenEngaged(() => {
+    engaged = true;
+    if (visible) loadArtwork();
+  }) : () => {};
   const observer = new IntersectionObserver(([entry]) => {
     if (!entry) return;
     visible = entry.isIntersecting;
-    if (visible && desktop) loadArtwork();
+    if (visible && desktop && engaged) loadArtwork();
     syncPlayback();
   }, { threshold: 0.05 });
   observer.observe(art);
@@ -178,6 +187,7 @@ export function createBurgerMotion(hero: HTMLElement, context: gsap.Context) {
   document.addEventListener("visibilitychange", syncPlayback);
   return () => {
     alive = false;
+    stopWaiting();
     observer.disconnect();
     gsap.ticker.remove(spring);
     toggle.removeEventListener("click", onToggle);

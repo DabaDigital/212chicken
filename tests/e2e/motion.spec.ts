@@ -8,10 +8,14 @@ const layerState = (page: Page) =>
     bun: getComputedStyle(document.querySelector('[data-hero-layer="bun"]')!).transform,
   }));
 
+/** Desktop starts the layers on the visitor's first pointer move, scroll, click or key press. */
+const engage = (page: Page) => page.mouse.move(400, 300);
+
 test.describe("Hero motion", () => {
   test("desktop: animation survives a route round-trip", async ({ page, isMobile }) => {
     test.skip(isMobile, "Desktop-only enhancement");
     await page.goto("/");
+    await engage(page);
     await expect(page.locator("[data-hero-art]")).toHaveAttribute("data-layers", "ready");
 
     await page.mouse.wheel(0, 450);
@@ -31,6 +35,7 @@ test.describe("Hero motion", () => {
 
   test("the burger assembles, explodes and can be paused on either device", async ({ page }) => {
     await page.goto("/");
+    await engage(page);
     await page.locator("[data-hero-art]").scrollIntoViewIfNeeded();
     await expect(page.getByRole("button", { name: "Assembler le burger", exact: true })).toBeVisible();
     await page.getByRole("button", { name: "Assembler le burger", exact: true }).click();
@@ -47,9 +52,28 @@ test.describe("Hero motion", () => {
     await expect(page.getByRole("button", { name: "Reprendre l’animation", exact: true })).toHaveAttribute("aria-pressed", "true");
   });
 
-  test("failed secondary artwork preserves the original burger and hides unavailable controls", async ({ page }) => {
+  test("desktop keeps the intact photo until the visitor engages", async ({ page, isMobile }) => {
+    test.skip(isMobile, "Phones load the layers on their first tap of the burger controls");
+    const layerRequests: string[] = [];
+    page.on("request", (request) => {
+      if (/hero%2F(layers|burger-assembled)/.test(request.url())) layerRequests.push(request.url());
+    });
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(1000);
+    await expect(page.locator("[data-hero-art]")).not.toHaveAttribute("data-layers");
+    await expect(page.locator("[data-hero-photo]")).toHaveCSS("opacity", "1");
+    expect(layerRequests).toEqual([]);
+    await engage(page);
+    await expect(page.locator("[data-hero-art]")).toHaveAttribute("data-layers", "ready");
+  });
+
+  test("failed secondary artwork preserves the original burger and hides unavailable controls", async ({ page, isMobile }) => {
     await page.route(/burger-assembled/, (route) => route.abort());
     await page.goto("/");
+    await engage(page);
+    // Phones load the layers on their first tap of the control.
+    if (isMobile) await page.getByRole("button", { name: "Assembler le burger", exact: true }).click();
     await page.locator("[data-hero-art]").scrollIntoViewIfNeeded();
     await expect(page.locator("[data-hero-photo]")).toHaveCSS("opacity", "1");
     await expect(page.locator("[data-burger-toggle]")).toBeHidden();

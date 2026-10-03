@@ -10,10 +10,13 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Small route styles ship with the HTML instead of blocking first paint on another request.
-  // experimental: { inlineCss: true },
+  experimental: { inlineCss: true },
   images: {
-    // Runtime copies live in /public/212 (see scripts/sync-assets.mjs).
-    localPatterns: [{ pathname: "/212/**", search: "" }],
+    // Runtime asset copies and owner-supplied social video covers.
+    localPatterns: [
+      { pathname: "/212/**", search: "" },
+      { pathname: "/social/**", search: "" },
+    ],
     // 75 for product photos (default); 65 only for the large campaign burger frames.
     qualities: [65, 75],
     // AVIF first (≈40% lighter than WebP on these alpha cut-outs), WebP for older browsers.

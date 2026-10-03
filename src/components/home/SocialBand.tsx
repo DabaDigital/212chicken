@@ -4,13 +4,13 @@ import type { CSSProperties } from "react";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 import { PillLink } from "@/components/ui/PillLink";
 import { TikTokIcon } from "@/components/ui/TikTokIcon";
-import { campaignImages, type StaticImage } from "@/lib/assets";
-import { getProductPhotos } from "@/lib/menu";
+import type { StaticImage } from "@/lib/assets";
 import { socialLinks, type SocialLink } from "@/lib/site";
 
 import styles from "./SocialBand.module.css";
 
 interface Tile extends StaticImage {
+  href?: string;
   /** "cover" bleeds art to the tile edges (cropped by the tile); "contain" keeps cut-outs whole. */
   fit: "contain" | "cover";
   /** object-position of cover art (keeps the subject in frame when the tile crops it). */
@@ -22,26 +22,17 @@ interface Tile extends StaticImage {
   scene?: "burger" | "feast" | "tenders" | "neon" | "cup";
 }
 
-const productTile = (id: string): Tile[] =>
-  getProductPhotos([id]).map((photo) => ({ ...photo, fit: "contain", pad: 6 }));
-const artTile = (image: StaticImage, options: Partial<Tile> = {}): Tile => ({ ...image, fit: "contain", ...options });
-
-/**
- * Tiles are decoration, not posts or reels (none are supplied): real product photos from menu.json and
- * the owner's campaign art (212-chicken-assets/campaign), with no play/carousel icons or captions, not
- * links, hidden from assistive technology. Two networks show three tiles each; a lone one shows four.
- */
+/** Owner-supplied video covers and direct links, in display order. */
 const TILES: Record<SocialLink["id"], Tile[]> = {
   instagram: [
-    ...productTile("royal-crunch-double").map((tile) => ({ ...tile, scene: "burger" as const, scale: 1.12, pad: 0 })),
-    artTile(campaignImages.tendersDip, { fit: "cover", position: "70% 50%", scene: "tenders" }),
-    artTile(campaignImages.boxExplosion, { fit: "cover", position: "50% 50%", scene: "feast" }),
-    artTile(campaignImages.cup),
+    { src: "/social/instagram-1.webp", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/DXzcBVsC-H4/" },
+    { src: "/social/instagram-2.webp", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/Dd1POipNHLk/" },
+    { src: "/social/instagram-3.webp", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/DcaxMD4tdF3/" },
   ],
   tiktok: [
-    artTile(campaignImages.tendersDip, { fit: "cover", position: "0% 50%", scene: "tenders" }),
-    artTile(campaignImages.neon, { pad: 16, scene: "neon" }),
-    artTile(campaignImages.cup, { pad: 6, scene: "cup" }),
+    { src: "/social/tiktok-1.webp", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7659363372692933909" },
+    { src: "/social/tiktok-2.webp", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7663510588957723925" },
+    { src: "/social/tiktok-3.webp", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7602612931741830421" },
   ],
 };
 
@@ -104,11 +95,15 @@ export function SocialBand() {
                     Voir {social.label}
                   </PillLink>
                 </div>
-                <div className={styles.tiles} aria-hidden="true">
-                  {TILES[social.id].slice(0, tileCount).map((tile) => (
-                    <div
+                <div className={styles.tiles} data-network={social.id}>
+                  {TILES[social.id].slice(0, tileCount).map((tile, index) => (
+                    <a
                       key={tile.src}
                       className={styles.tile}
+                      href={tile.href ?? social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={tile.href ? `Voir la vidéo ${index + 1} sur ${social.label} (nouvel onglet)` : `Voir les vidéos de ${social.handle} sur ${social.label} (nouvel onglet)`}
                       data-scene={tile.scene}
                       style={{ "--tile-scale": tile.scale ?? 1, "--tile-pad": `${tile.pad ?? 8}%` } as CSSProperties}
                     >
@@ -121,7 +116,12 @@ export function SocialBand() {
                         className={tile.fit === "cover" ? `${styles.tileImage} ${styles.tileCover}` : styles.tileImage}
                         style={tile.position ? { objectPosition: tile.position } : undefined}
                       />
-                    </div>
+                      <span className={styles.play} aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </span>
+                    </a>
                   ))}
                 </div>
               </div>
