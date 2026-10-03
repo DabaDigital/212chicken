@@ -43,11 +43,8 @@ export const siteUrl = parseSiteUrl(process.env.SITE_URL ||
   (isVercelProduction && process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined));
 
-// The owner's development domain must stay out of search even on a production hosting slot.
-const isDevelopmentDomain = siteUrl?.hostname === "212chicken.dabadigital.ma";
-
-/** Never index preview/development deployments, even if they inherit production settings. */
-export const isIndexable = !isVercelPreview && !isDevelopmentDomain && Boolean(siteUrl) &&
+/** Never index Vercel preview deployments, even if they inherit production settings. */
+export const isIndexable = !isVercelPreview && Boolean(siteUrl) &&
   (process.env.SITE_INDEXABLE === undefined ? isVercelProduction : process.env.SITE_INDEXABLE === "true");
 
 export function absoluteUrl(pathname: string): string | null {

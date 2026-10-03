@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Production search signals", () => {
-  test.skip(process.env.SITE_INDEXABLE !== "true" || !process.env.SITE_URL || process.env.SITE_URL.includes("212chicken.dabadigital.ma"), "Requires a simulated production build");
+  test.skip(process.env.SITE_INDEXABLE !== "true" || !process.env.SITE_URL, "Requires a simulated production build");
 
   test("canonical, sitemap and robots agree on the production domain", async ({ page, request }) => {
     const origin = new URL(process.env.SITE_URL!).origin;

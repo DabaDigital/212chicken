@@ -2,10 +2,9 @@
 
 ## Development and launch domains
 
-The owner confirmed that `212chicken.dabadigital.ma` is a development domain.
-Set `SITE_URL=https://212chicken.dabadigital.ma` and `SITE_INDEXABLE=false` on that deployment.
-The code additionally blocks indexing for that hostname. Vercel preview deployments remain blocked.
-Do not submit the development sitemap to Google.
+The owner requested indexing for `212chicken.dabadigital.ma`.
+Set `SITE_URL=https://212chicken.dabadigital.ma` and `SITE_INDEXABLE=true` on that deployment,
+then rebuild. There is no hostname-specific indexing block. Vercel preview deployments remain blocked.
 
 Confirm the exact brand domain before launch: the reference supplied was `https://212chicken.ma/`,
 while a later message used `212checkend.ma`. No domain or DNS changes were made.
@@ -37,7 +36,7 @@ as a daily structured schedule.
 1. Confirm the production domain and preserve existing indexed URLs. Inventory the old site and map
    retired pages to the closest replacement with permanent redirects; do not redirect everything home.
 2. Deploy to the confirmed domain with the production environment above. Verify `/robots.txt`,
-   `/sitemap.xml`, canonical tags and absence of `noindex`. Keep the development copy excluded.
+   `/sitemap.xml`, canonical tags and absence of `noindex`.
 3. Verify the domain in Google Search Console (DNS verification or the optional HTML token).
    Submit `/sitemap.xml`, inspect the homepage, menu and branch URLs, and request indexing.
 4. Run Google's Rich Results Test against the deployed branch pages. Optional missing fields need
@@ -52,7 +51,7 @@ as a daily structured schedule.
 
 There is no opt-in flag or special schema that guarantees inclusion. Google requires ordinary search
 eligibility, indexable pages and snippets, useful visible content, and structured data matching it.
-The development site intentionally remains ineligible until a production launch. No llms.txt,
+The current domain can be indexed with the settings above. No llms.txt,
 fabricated review markup or keyword-stuffed hidden content was added. First-place rankings and
 AI Overview inclusion cannot be promised.
 
