@@ -12,9 +12,9 @@ import { site, socialLinks } from "@/lib/site";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata({
-  title: "Nos restaurants",
+  title: "Restaurants au Maroc — Adresses et horaires",
   description:
-    "Trouvez un restaurant 212 Chicken grâce à la recherche Google Maps, puis découvrez la carte et ses prix en dirhams.",
+    "Trouvez 212 Chicken à Casablanca, Bouskoura, Tanger et Marrakech : adresses, horaires disponibles, services et itinéraires Google Maps.",
   path: "/restaurants",
 });
 

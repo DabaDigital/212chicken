@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/Hero";
+import { BrandQuestions } from "@/components/home/BrandQuestions";
 import { Ribbon } from "@/components/home/Ribbon";
 import { SocialBand } from "@/components/home/SocialBand";
 import { FeaturedMenu } from "@/components/menu/FeaturedMenu";
@@ -42,6 +43,7 @@ export default function HomePage() {
 
       <FindRestaurant />
       <SocialBand />
+      <BrandQuestions />
     </MotionGate>
   );
 }

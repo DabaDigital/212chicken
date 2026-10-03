@@ -17,7 +17,10 @@ export const metadata: Metadata = {
   applicationName: "212 Chicken",
   openGraph: openGraphBase(),
   twitter: { card: "summary_large_image" },
-  robots: isIndexable ? { index: true, follow: true } : { index: false, follow: false },
+  robots: isIndexable
+    ? { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } }
+    : { index: false, follow: false },
+  ...(process.env.GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } } : {}),
   formatDetection: { telephone: false, address: false, email: false },
 };
 

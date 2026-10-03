@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const ROUTES = ["/", "/carte", "/restaurants"];
+const ROUTES = ["/", "/carte", "/restaurants", "/restaurants/maarif"];
 const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 
 test.describe("Accessibility (axe-core)", () => {

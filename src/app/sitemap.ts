@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { isIndexable, siteUrl } from "@/lib/site";
+import { restaurants } from "@/lib/restaurants";
 
 const ROUTES = [
   { path: "/", priority: 1 },
@@ -12,7 +13,7 @@ const ROUTES = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteUrl;
   if (!isIndexable || !base) return [];
-  return ROUTES.map(({ path, priority }) => ({
+  return [...ROUTES, ...restaurants.map((restaurant) => ({ path: `/restaurants/${restaurant.id}`, priority: 0.8 }))].map(({ path, priority }) => ({
     url: new URL(path, base).toString(),
     changeFrequency: "monthly",
     priority,

@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 
 import { siteUrl } from "./site";
 
-export const SITE_TITLE = "212 Chicken — Ça croque. Ça claque.";
+export const SITE_TITLE = "212 Chicken Maroc — Poulet croustillant, menu et restaurants";
 export const SITE_DESCRIPTION =
-  "212 Chicken : burgers au poulet croustillant, box à partager, wraps, tenders, milkshakes et desserts. Découvrez la carte et ses prix en dirhams.";
+  "Découvrez 212 Chicken au Maroc : burgers au poulet croustillant, tenders et box à partager. Menu, prix en DH et restaurants à Casablanca, Bouskoura, Tanger et Marrakech.";
 
 /**
  * Open Graph fields shared by every route. Next.js merges `openGraph` shallowly, so each page

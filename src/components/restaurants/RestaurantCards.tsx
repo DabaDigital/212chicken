@@ -1,5 +1,6 @@
 import { ArrowUpRight, Bike, Clock, MapPin, ShoppingBag, Store } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import type { StaticImage } from "@/lib/assets";
 import type { Restaurant, RestaurantService } from "@/lib/restaurants";
@@ -18,7 +19,7 @@ const SERVICE_LABELS: Record<RestaurantService, string> = {
   livraison: "Livraison",
 };
 
-/** Cards for confirmed restaurant entries only. Each card is one link to that restaurant's map listing. */
+/** Cards link to each confirmed restaurant's address, services and directions. */
 export function RestaurantCards({ restaurants, className }: { restaurants: Restaurant[]; logo: StaticImage; className?: string }) {
   return (
     <ul role="list" className={[styles.list, className].filter(Boolean).join(" ")}>
@@ -39,10 +40,10 @@ export function RestaurantCards({ restaurants, className }: { restaurants: Resta
                 <MapPin className={styles.pin} size={20} strokeWidth={2.25} aria-hidden="true" />
                 <div className={styles.heading}>
                   <h3 className={styles.name}>
-                    <a href={restaurant.mapsUrl} className={styles.link} target="_blank" rel="noopener noreferrer">
+                    <Link href={`/restaurants/${restaurant.id}`} className={styles.link}>
                       {restaurant.name}
-                      <span className="sr-only"> — voir sur Google Maps (nouvel onglet)</span>
-                    </a>
+                      <span className="sr-only"> — adresse et horaires à {restaurant.city}</span>
+                    </Link>
                   </h3>
                   <address className={styles.address}>
                     {restaurant.address}

@@ -8,7 +8,7 @@ const MAPS_SEARCH = new RegExp(`^${MAPS_SEARCH_PREFIX.replace(/[.+?/]/g, "\\$&")
 // Expectations follow the data: restaurant cards and TikTok appear only once the owner supplies them.
 const website = JSON.parse(readFileSync("212-chicken-assets/212-chicken-assets/data/website.json", "utf8")) as {
   brand: { instagram: string; tiktok?: string | null };
-  restaurants: { verified?: unknown; featured?: boolean; name?: string; maps_url?: string }[];
+  restaurants: { id: string; city: string; verified?: unknown; featured?: boolean; name?: string; maps_url?: string }[];
 };
 const confirmedRestaurants = website.restaurants.filter((entry) => entry.verified === true).length;
 
@@ -72,8 +72,8 @@ test.describe("Navigation and calls to action", () => {
     const featured = website.restaurants.filter((entry) => entry.verified === true && entry.featured).slice(0, 4);
     await expect(band.getByRole("article")).toHaveCount(featured.length);
     for (const restaurant of featured) {
-      await expect(band.getByRole("link", { name: `${restaurant.name} — voir sur Google Maps (nouvel onglet)`, exact: true }))
-        .toHaveAttribute("href", restaurant.maps_url!);
+      await expect(band.getByRole("link", { name: `${restaurant.name} — adresse et horaires à ${restaurant.city}`, exact: true }))
+        .toHaveAttribute("href", `/restaurants/${restaurant.id}`);
     }
   });
 

@@ -3,13 +3,15 @@ import { FindRestaurant } from "@/components/restaurants/FindRestaurant";
 import { getMenu } from "@/lib/menu";
 import { pageMetadata } from "@/lib/metadata";
 import { site } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { menuJsonLd } from "@/lib/structured-data";
 
 import styles from "./page.module.css";
 
 const menu = getMenu();
 
 export const metadata = pageMetadata({
-  title: "La carte",
+  title: "Menu et prix en DH — Burgers, tenders et box",
   description: `La carte 212 Chicken : ${menu.totalProducts} produits et leurs prix en dirhams — ${menu.groups
     .map((group) => group.label.toLowerCase())
     .join(", ")}.`,
@@ -17,6 +19,7 @@ export const metadata = pageMetadata({
 });
 
 export default function CartePage() {
+  const jsonLd = menuJsonLd();
   return (
     <>
       <section className={styles.intro} aria-labelledby="carte-title">
@@ -36,6 +39,7 @@ export default function CartePage() {
       </div>
 
       <FindRestaurant />
+      {jsonLd ? <JsonLd data={jsonLd} /> : null}
     </>
   );
 }
