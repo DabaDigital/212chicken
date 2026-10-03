@@ -79,7 +79,7 @@ export function Hero() {
                     <div className={styles.assembled} data-burger-assembled>
                       <Image
                         {...brandImages.burgerAssembled}
-                        alt=""
+                        alt="Burger 212 Chicken au poulet croustillant, salade et cheddar"
                         sizes={artSizes}
                         quality={65}
                         loading="lazy"
@@ -94,7 +94,7 @@ export function Hero() {
                             src={layer.src}
                             width={layer.width}
                             height={layer.height}
-                            alt=""
+                            alt={layer.id === "bun" ? "Pain au sésame du burger 212 Chicken" : "Poulet pané, cheddar, tomate et salade du burger 212 Chicken"}
                             sizes={artSizes}
                             quality={65}
                             loading="lazy"
@@ -108,7 +108,7 @@ export function Hero() {
                           <div key={index} className={`${styles.crumbGroup} ${styles[`crumbGroup${index}`]}`} data-burger-crumbs>
                             <Image
                               src={garnish.src} width={garnish.width} height={garnish.height}
-                              alt="" sizes={artSizes} quality={65} loading="lazy"
+                              alt="Éclats de panure autour du burger au poulet" sizes={artSizes} quality={65} loading="lazy"
                               className={styles.layer} data-burger-image
                             />
                           </div>

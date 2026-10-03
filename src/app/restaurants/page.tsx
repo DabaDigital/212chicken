@@ -48,7 +48,7 @@ export default function RestaurantsPage() {
               src={burgerAssembled.src}
               width={burgerAssembled.width}
               height={burgerAssembled.height}
-              alt=""
+              alt="Burger 212 Chicken au poulet croustillant, salade et cheddar"
               sizes="(min-width: 64rem) 560px, (min-width: 48rem) 45vw, 70vw"
               quality={65}
               className={styles.burger}

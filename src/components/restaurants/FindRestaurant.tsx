@@ -62,7 +62,7 @@ export function FindRestaurant() {
               src={boxExplosion.src}
               width={boxExplosion.width}
               height={boxExplosion.height}
-              alt=""
+              alt="Box 212 Chicken garnie de poulet croustillant, de frites et de burgers"
               sizes="(min-width: 64rem) 900px, (min-width: 48rem) 55vw, 92vw"
               className={styles.feast}
             />
