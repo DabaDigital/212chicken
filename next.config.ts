@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
     localPatterns: [
       { pathname: "/212/**", search: "" },
       { pathname: "/social/**", search: "" },
+      { pathname: "/locations/**", search: "" },
     ],
     // 75 for product photos (default); 65 only for the large campaign burger frames.
     qualities: [65, 75],

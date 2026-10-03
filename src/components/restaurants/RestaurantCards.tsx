@@ -19,27 +19,20 @@ const SERVICE_LABELS: Record<RestaurantService, string> = {
 };
 
 /** Cards for confirmed restaurant entries only. Each card is one link to that restaurant's map listing. */
-export function RestaurantCards({ restaurants, logo, className }: { restaurants: Restaurant[]; logo: StaticImage; className?: string }) {
+export function RestaurantCards({ restaurants, className }: { restaurants: Restaurant[]; logo: StaticImage; className?: string }) {
   return (
     <ul role="list" className={[styles.list, className].filter(Boolean).join(" ")}>
       {restaurants.map((restaurant) => (
         <li key={restaurant.id}>
           <article className={styles.card}>
-            <div className={restaurant.photo ? styles.media : `${styles.media} ${styles.mediaFallback}`}>
-              {restaurant.photo ? (
+            <div className={styles.media}>
                 <Image
-                  src={restaurant.photo}
+                  src={restaurant.photo ?? "/locations/storefront.webp"}
                   alt=""
                   fill
                   sizes="(min-width: 75rem) 330px, (min-width: 36rem) 46vw, 92vw"
                   className={styles.photo}
                 />
-              ) : (
-                <>
-                  <span className={styles.cityArt} aria-hidden="true">{restaurant.city}</span>
-                  <Image src={logo.src} width={logo.width} height={logo.height} alt="" sizes="90px" className={styles.logo} />
-                </>
-              )}
             </div>
             <div className={styles.body}>
               <div className={styles.top}>
