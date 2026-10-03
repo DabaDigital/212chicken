@@ -12,9 +12,7 @@ const menu = getMenu();
 
 export const metadata = pageMetadata({
   title: "Menu et prix en DH — Burgers, tenders et box",
-  description: `La carte 212 Chicken : ${menu.totalProducts} produits et leurs prix en dirhams — ${menu.groups
-    .map((group) => group.label.toLowerCase())
-    .join(", ")}.`,
+  description: `Consultez les ${menu.totalProducts} produits de la carte 212 Chicken et leurs prix en DH. Choisissez votre burger, votre box à partager, vos tenders ou votre dessert.`,
   path: "/carte",
 });
 

@@ -29,7 +29,7 @@ export function RestaurantCards({ restaurants, className }: { restaurants: Resta
             <div className={styles.media}>
                 <Image
                   src={restaurant.photo ?? "/locations/storefront.webp"}
-                  alt=""
+                  alt={restaurant.photo ? `Devanture du restaurant 212 Chicken ${restaurant.name}` : "Illustration d’une devanture 212 Chicken dans un centre commercial"}
                   fill
                   sizes="(min-width: 75rem) 330px, (min-width: 36rem) 46vw, 92vw"
                   className={styles.photo}

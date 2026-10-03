@@ -18,7 +18,7 @@ interface ProductCardProps {
 
 /**
  * One tab stop per product: the name is a real <button> whose ::after stretches over the card.
- * The photo is decorative here (alt="") because the product name is announced right next to it.
+ * Product photos identify the dish; the button remains the only interactive target.
  */
 export function ProductCard({ item, sizes, onOpen, showCategory = false, priority }: ProductCardProps) {
   return (
@@ -28,7 +28,7 @@ export function ProductCard({ item, sizes, onOpen, showCategory = false, priorit
           src={item.image.src}
           width={item.image.width}
           height={item.image.height}
-          alt=""
+          alt={`${item.name} — ${item.categoryLabel}, 212 Chicken`}
           sizes={sizes}
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority === "high" ? "high" : "auto"}

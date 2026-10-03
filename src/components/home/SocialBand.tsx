@@ -10,6 +10,7 @@ import { socialLinks, type SocialLink } from "@/lib/site";
 import styles from "./SocialBand.module.css";
 
 interface Tile extends StaticImage {
+  alt: string;
   href?: string;
   /** "cover" bleeds art to the tile edges (cropped by the tile); "contain" keeps cut-outs whole. */
   fit: "contain" | "cover";
@@ -25,14 +26,14 @@ interface Tile extends StaticImage {
 /** Owner-supplied video covers and direct links, in display order. */
 const TILES: Record<SocialLink["id"], Tile[]> = {
   instagram: [
-    { src: "/social/instagram-1.webp", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/DXzcBVsC-H4/" },
-    { src: "/social/instagram-2.webp", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/Dd1POipNHLk/" },
-    { src: "/social/instagram-3.webp", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/DcaxMD4tdF3/" },
+    { src: "/social/instagram-1.webp", alt: "Un adulte et une enfant partagent du poulet à une table chez 212 Chicken", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/DXzcBVsC-H4/" },
+    { src: "/social/instagram-2.webp", alt: "Présentation d’une box et d’une boisson au comptoir 212 Chicken", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/Dd1POipNHLk/" },
+    { src: "/social/instagram-3.webp", alt: "Scène humoristique devant un restaurant 212 Chicken", width: 720, height: 1280, fit: "cover", href: "https://www.instagram.com/p/DcaxMD4tdF3/" },
   ],
   tiktok: [
-    { src: "/social/tiktok-1.webp", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7659363372692933909" },
-    { src: "/social/tiktok-2.webp", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7663510588957723925" },
-    { src: "/social/tiktok-3.webp", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7602612931741830421" },
+    { src: "/social/tiktok-1.webp", alt: "Box 212 Chicken posée sur une table en terrasse", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7659363372692933909" },
+    { src: "/social/tiktok-2.webp", alt: "Scène filmée à l’intérieur d’un restaurant 212 Chicken", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7663510588957723925" },
+    { src: "/social/tiktok-3.webp", alt: "Une femme face à la caméra devant l’enseigne 212 Chicken", width: 360, height: 640, fit: "cover", href: "https://www.tiktok.com/@212_chicken_maroc/video/7602612931741830421" },
   ],
 };
 
@@ -111,7 +112,7 @@ export function SocialBand() {
                         src={tile.src}
                         width={tile.width}
                         height={tile.height}
-                        alt=""
+                        alt={tile.alt}
                         sizes="(min-width: 64rem) 200px, (min-width: 40rem) 25vw, 30vw"
                         className={tile.fit === "cover" ? `${styles.tileImage} ${styles.tileCover}` : styles.tileImage}
                         style={tile.position ? { objectPosition: tile.position } : undefined}

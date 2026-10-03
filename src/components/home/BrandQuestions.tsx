@@ -10,7 +10,7 @@ export function BrandQuestions() {
         <div className={styles.intro}>
           <p className={styles.eyebrow}>212 Chicken au Maroc</p>
           <h2 id="brand-questions-title" className={styles.title}>Le poulet croustillant,<br /><span className="accent">près de chez vous.</span></h2>
-          <p>212 Chicken propose des burgers au poulet croustillant, des tenders, des wraps et des box à partager, ainsi que des milkshakes et des desserts.</p>
+          <p>Chez 212 Chicken, ça croque. Ça claque. Découvrez nos burgers au poulet croustillant, nos tenders, nos wraps et nos box à partager, puis terminez avec un milkshake ou un dessert.</p>
           <PillLink href="/restaurants" variant="outline">Trouver mon restaurant</PillLink>
         </div>
         <div className={styles.questions}>

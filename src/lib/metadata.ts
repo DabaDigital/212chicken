@@ -6,7 +6,7 @@ import { siteUrl } from "./site";
 
 export const SITE_TITLE = "212 Chicken Maroc — Poulet croustillant, menu et restaurants";
 export const SITE_DESCRIPTION =
-  "Découvrez 212 Chicken au Maroc : burgers au poulet croustillant, tenders et box à partager. Menu, prix en DH et restaurants à Casablanca, Bouskoura, Tanger et Marrakech.";
+  "Envie de poulet croustillant ? Découvrez le menu 212 Chicken, les prix en DH et les adresses de nos restaurants au Maroc pour préparer votre prochaine visite.";
 
 /**
  * Open Graph fields shared by every route. Next.js merges `openGraph` shallowly, so each page
